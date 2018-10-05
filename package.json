@@ -43,7 +43,7 @@
     "@semantic-release/git": "^7.0.4",
     "@semantic-release/github": "^5.0.6",
     "@semantic-release/npm": "^5.0.4",
-    "@types/node": "^8.10.34",
+    "@types/node": "^10.11.4",
     "@types/webpack": "^4.4.14",
     "@types/webpack-dev-server": "^3.1.1",
     "commitizen": "^3.0.2",
