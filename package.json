@@ -8,7 +8,8 @@
     "lint": "tslint --config tslint.js --project tsconfig.json",
     "build": "tsc",
     "watch": "tsc -w",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "cz": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -38,11 +39,18 @@
     "typescript": "3.0.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.4",
+    "@semantic-release/github": "^5.0.6",
+    "@semantic-release/npm": "^5.0.4",
     "@types/node": "^8.10.34",
     "@types/webpack": "^4.4.14",
     "@types/webpack-dev-server": "^3.1.1",
+    "commitizen": "^3.0.2",
+    "cz-conventional-changelog": "^2.1.0",
     "lint-staged": "^7.2.0",
     "rimraf": "^2.6.2",
+    "semantic-release": "^15.9.17",
     "tslint": "^5.9.1",
     "tslint-ionic-rules": "0.0.19"
   },
@@ -55,5 +63,34 @@
     "ignore": [
       "**/__tests__/*.{ts,tsx}"
     ]
+  },
+  "release": {
+    "branch": "stable",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/github",
+      "@semantic-release/npm"
+    ],
+    "success": [
+      "@semantic-release/github"
+    ],
+    "fail": [
+      "@semantic-release/github"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
