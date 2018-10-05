@@ -48,6 +48,7 @@
     "@types/webpack-dev-server": "^3.1.1",
     "commitizen": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
+    "husky": "^1.1.1",
     "lint-staged": "^7.2.0",
     "rimraf": "^2.6.2",
     "semantic-release": "^15.9.17",
@@ -56,6 +57,11 @@
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "lint-staged": {
     "linters": {
       "*.{ts,tsx}": "npm run lint"
