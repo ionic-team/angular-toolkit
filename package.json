@@ -56,10 +56,10 @@
     "tslint-ionic-rules": "0.0.19"
   },
   "peerDependencies": {
-    "@angular-devkit/architect": "0.9.0-beta.3",
-    "@angular-devkit/build-angular": "0.9.0-beta.3",
-    "@angular-devkit/core": "0.9.0-beta.3",
-    "@angular-devkit/schematics": "0.9.0-beta.3"
+    "@angular-devkit/architect": ">=0.7.2 <7.0.0",
+    "@angular-devkit/build-angular": ">=0.7.2 <7.0.0",
+    "@angular-devkit/core": ">=0.7.2 <7.0.0",
+    "@angular-devkit/schematics": ">=0.7.2 <7.0.0"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
