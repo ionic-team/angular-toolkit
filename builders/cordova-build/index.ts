@@ -1,33 +1,32 @@
-import { BuildEvent, Builder, BuilderConfiguration, BuilderContext } from '@angular-devkit/architect';
+import { BuildEvent, Builder, BuilderConfiguration, BuilderContext, BuilderDescription } from '@angular-devkit/architect';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { Observable, of } from 'rxjs';
-import { concatMap, tap } from 'rxjs/operators';
+import { concatMap, tap, map } from 'rxjs/operators';
 
 import { CordovaBuildBuilderSchema } from './schema';
 
 export { CordovaBuildBuilderSchema };
 import * as fs from 'fs';
-import * as path from 'path';
 
 export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
-  private configuredBuilder: string;
-  private configuredBuilderPath: string;
-  private originalArchitectureConfig: any;
-  private BrowserBuilder: any;
+  private buildConfig: any;
   constructor(public context: BuilderContext) {
     const architectConfigFile = fs.readFileSync(this.context.workspace.root + '/angular.json');
-    this.originalArchitectureConfig = JSON.parse(architectConfigFile.toString());
-    this.configuredBuilder = this.originalArchitectureConfig.projects.app.architect.build.builder.replace(':browser', '');
-    this.configuredBuilderPath = path.resolve('node_modules', this.configuredBuilder + '/src/browser');
-
-    this.BrowserBuilder = require(this.configuredBuilderPath).default;
+    const originalArchitectureConfig = JSON.parse(architectConfigFile.toString());
+    this.buildConfig = originalArchitectureConfig.projects.app.architect.build;
   }
 
   run(builderConfig: BuilderConfiguration<CordovaBuildBuilderSchema>): Observable<BuildEvent> {
-    const browserBuilder = new this.BrowserBuilder(this.context);
-
-    return this.buildBrowserConfig(builderConfig.options).pipe(
-      concatMap(browserConfig => browserBuilder.run(browserConfig))
+    let builderDescription: BuilderDescription;
+    let customBuilderConfig: any;
+    return this.context.architect.getBuilderDescription(this.buildConfig).pipe(
+      tap(description => builderDescription = description),
+      concatMap(() => this.buildBrowserConfig(builderConfig.options)),
+      tap(generatedBrowserConfig =>  customBuilderConfig = generatedBrowserConfig),
+      map(() => this.context.architect.getBuilder(builderDescription, this.context)),
+      concatMap(builder => {
+        return builder.run(customBuilderConfig)
+      }),
     );
   }
 
