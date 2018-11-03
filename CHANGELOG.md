@@ -3,12 +3,12 @@
 
 ### Bug Fixes
 
-* **serve:** validate cordova-build options to provide defaults ([98d6a63](https://github.com/ionic-team/angular-toolkit.git/commit/98d6a63))
+* **serve:** validate cordova-build options to provide defaults ([98d6a63](https://github.com/ionic-team/angular-toolkit/commit/98d6a63))
 
 
 ### Features
 
-* support Angular 7 ([3d1172b](https://github.com/ionic-team/angular-toolkit.git/commit/3d1172b))
+* support Angular 7 ([3d1172b](https://github.com/ionic-team/angular-toolkit/commit/3d1172b))
 
 # 1.0.0 (2018-10-05)
 
