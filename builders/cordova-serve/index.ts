@@ -15,8 +15,8 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
 
   run(builderConfig: BuilderConfiguration<CordovaServeBuilderSchema>): Observable<BuildEvent> {
     const [ project, target, configuration ] = builderConfig.options.devServerTarget.split(':');
-    const { port, host, proxyConfig } = builderConfig.options;
-    const devServerTargetSpec = { project, target, configuration, overrides: { port, host, proxyConfig } };
+    const { port, host, ssl, proxyConfig } = builderConfig.options;
+    const devServerTargetSpec = { project, target, configuration, overrides: { port, host, ssl, proxyConfig } };
     const devServerBuilderConfig = this.context.architect.getBuilderConfiguration<DevServerBuilderOptions>(devServerTargetSpec);
 
     let devServerDescription: BuilderDescription;
