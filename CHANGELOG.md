@@ -1,14 +1,14 @@
-# [1.2.0](https://github.com/ionic-team/angular-toolk/compare/v1.1.0...v1.2.0) (2018-11-15)
+# [1.2.0](https://github.com/ionic-team/angular-toolkit/compare/v1.1.0...v1.2.0) (2018-11-15)
 
 
 ### Bug Fixes
 
-* **changelog:** correctly link to commits ([#33](https://github.com/ionic-team/angular-toolk/issues/33)) ([be96104](https://github.com/ionic-team/angular-toolk/commit/be96104))
+* **changelog:** correctly link to commits ([#33](https://github.com/ionic-team/angular-toolkit/issues/33)) ([be96104](https://github.com/ionic-team/angular-toolkit/commit/be96104))
 
 
 ### Features
 
-* **serve:** support `--ssl` for dev-server ([9d65915](https://github.com/ionic-team/angular-toolk/commit/9d65915))
+* **serve:** support `--ssl` for dev-server ([9d65915](https://github.com/ionic-team/angular-toolkit/commit/9d65915))
 
 # [1.1.0](https://github.com/ionic-team/angular-toolkit.git/compare/v1.0.0...v1.1.0) (2018-10-31)
 
