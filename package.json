@@ -1,6 +1,6 @@
 {
   "name": "@ionic/angular-toolkit",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Schematics and builders for @ionic/angular apps.",
   "homepage": "https://ionicframework.com/",
   "author": "Ionic Team <hi@ionicframework.com> (https://ionicframework.com)",
