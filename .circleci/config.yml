@@ -3,10 +3,10 @@ version: 2
 aliases:
   - &restore-cache
       keys:
-        - dependency-cache-{{ checksum "package.json" }}
+        - dependency-cache-{{ checksum "package.json" }}-1
 
   - &save-cache
-      key: dependency-cache-{{ checksum "package.json" }}
+      key: dependency-cache-{{ checksum "package.json" }}-1
       paths:
         - node_modules
 
