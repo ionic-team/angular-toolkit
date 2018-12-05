@@ -2,3 +2,5 @@
 
 tsconfig.json
 tslint.js
+*.ts
+!*.d.ts
