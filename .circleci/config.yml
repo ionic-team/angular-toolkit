@@ -24,6 +24,7 @@ jobs:
       - run: npm install
       - save_cache: *save-cache
       - run: npm run build
+      - run: npm run lint
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
