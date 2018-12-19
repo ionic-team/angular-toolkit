@@ -103,7 +103,7 @@ function addRouteToNgModule(options: PageOptions): Rule {
 
     const relativePath = buildRelativePath(module, pagePath);
 
-    const routePath = options.routePath ? options.routePath : options.name;
+    const routePath = strings.dasherize(options.routePath ? options.routePath : options.name);
     const routeLoadChildren = `${relativePath}#${strings.classify(options.name)}PageModule`;
     const changes = addRouteToRoutesArray(source, module, routePath, routeLoadChildren);
     const recorder = host.beginUpdate(module);

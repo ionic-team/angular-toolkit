@@ -66,9 +66,8 @@
     },
     "routePath": {
       "type": "string",
-      "description": "path the route should be",
+      "description": "The path to use for the route of the page",
       "default": ""
-
     }
   },
   "required": []
