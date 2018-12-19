@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/ionic-team/angular-toolkit/compare/v1.2.0...v1.2.1) (2018-12-19)
+
+
+### Bug Fixes
+
+* **build:** respect browserTarget setting ([3a9adfa](https://github.com/ionic-team/angular-toolkit/commit/3a9adfa))
+* **page:** dasherize route path ([e32e77b](https://github.com/ionic-team/angular-toolkit/commit/e32e77b))
+
 # [1.2.0](https://github.com/ionic-team/angular-toolkit/compare/v1.1.0...v1.2.0) (2018-11-15)
 
 
