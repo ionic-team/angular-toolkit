@@ -1,29 +1,12 @@
-import * as ts from 'typescript';
-
 import { Path, join, normalize, strings } from '@angular-devkit/core';
-
-import {
-  DirEntry,
-  Rule,
-  SchematicsException,
-  Tree,
-  apply,
-  branchAndMerge,
-  chain,
-  filter,
-  mergeWith,
-  move,
-  noop,
-  template,
-  url,
-} from '@angular-devkit/schematics';
-
+import { DirEntry, Rule, SchematicsException, Tree, apply, branchAndMerge, chain, filter, mergeWith, move, noop, template, url } from '@angular-devkit/schematics';
 import { findNodes } from '@schematics/angular/utility/ast-utils';
 import { Change, InsertChange } from '@schematics/angular/utility/change';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { ModuleOptions, buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
+import * as ts from 'typescript';
 
 import { Schema as PageOptions } from './schema';
 
