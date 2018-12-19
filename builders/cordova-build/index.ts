@@ -1,5 +1,4 @@
-import { BuildEvent, Builder, BuilderConfiguration, BuilderContext } from '@angular-devkit/architect';
-import { BrowserBuilder } from '@angular-devkit/build-angular/src/browser';
+import { BuildEvent, Builder, BuilderConfiguration, BuilderContext, BuilderDescription } from '@angular-devkit/architect';
 import { BrowserBuilderSchema } from '@angular-devkit/build-angular/src/browser/schema';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { Observable, of } from 'rxjs';
@@ -13,10 +12,20 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
   constructor(public context: BuilderContext) {}
 
   run(builderConfig: BuilderConfiguration<CordovaBuildBuilderSchema>): Observable<BuildEvent> {
-    const browserBuilder = new BrowserBuilder(this.context); // TODO: shouldn't this use `architect.getBuilder()`?
+    const [ project, target, configuration ] = builderConfig.options.browserTarget.split(':');
+    const browserTargetSpec = { project, target, configuration, overrides: {} };
 
-    return this.buildBrowserConfig(builderConfig.options).pipe(
-      concatMap(browserConfig => browserBuilder.run(browserConfig))
+    let browserConfig = this.context.architect.getBuilderConfiguration<BrowserBuilderSchema>(browserTargetSpec);
+    let browserDescription: BuilderDescription;
+
+    return of(null).pipe(// tslint:disable-line:no-null-keyword
+      concatMap(() => this.context.architect.getBuilderDescription(browserConfig)),
+      tap(description => browserDescription = description),
+      concatMap(() => this.context.architect.validateBuilderOptions(browserConfig, browserDescription)),
+      tap(config => browserConfig = config),
+      tap(() => this.prepareBrowserConfig(builderConfig.options, browserConfig.options)),
+      concatMap(() => of(this.context.architect.getBuilder(browserDescription, this.context))),
+      concatMap(builder => builder.run(browserConfig))
     );
   }
 
