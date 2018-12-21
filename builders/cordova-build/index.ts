@@ -29,17 +29,6 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     );
   }
 
-  buildBrowserConfig(options: CordovaBuildBuilderSchema): Observable<BuilderConfiguration<BrowserBuilderSchema>> {
-    let browserConfig: BuilderConfiguration<BrowserBuilderSchema>;
-
-    return of(null).pipe(// tslint:disable-line:no-null-keyword
-      concatMap(() => this._getBrowserConfig(options)),
-      tap(config => browserConfig = config),
-      tap(() => this.prepareBrowserConfig(options, browserConfig.options)),
-      concatMap(() => of(browserConfig))
-    );
-  }
-
   // Mutates browserOptions
   prepareBrowserConfig(options: CordovaBuildBuilderSchema, browserOptions: BrowserBuilderSchema) {
     const cordovaBasePath = normalize(options.cordovaBasePath ? options.cordovaBasePath : '.');
@@ -68,17 +57,6 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
         lazy: false,
       });
     }
-  }
-
-  protected _getBrowserConfig(options: CordovaBuildBuilderSchema): Observable<BuilderConfiguration<BrowserBuilderSchema>> {
-    const { architect } = this.context;
-    const [ project, target, configuration ] = options.browserTarget.split(':');
-    const browserTargetSpec = { project, target, configuration, overrides: {} };
-    const builderConfig = architect.getBuilderConfiguration<BrowserBuilderSchema>(browserTargetSpec);
-
-    return architect.getBuilderDescription(builderConfig).pipe(
-      concatMap(browserDescription => architect.validateBuilderOptions(builderConfig, browserDescription))
-    );
   }
 }
 
