@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/ionic-team/angular-toolkit/compare/v1.2.1...v1.2.2) (2018-12-21)
+
+
+### Bug Fixes
+
+* **page:** properly handle project selection ([4875aa7](https://github.com/ionic-team/angular-toolkit/commit/4875aa7))
+
 ## [1.2.1](https://github.com/ionic-team/angular-toolkit/compare/v1.2.0...v1.2.1) (2018-12-19)
 
 
