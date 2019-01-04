@@ -46,6 +46,9 @@
       "aliases": ["app"],
       "extends": "@schematics/angular:application"
     },
+    "e2e": {
+      "extends": "@schematics/angular:e2e"
+    },
     "library": {
       "aliases": ["lib"],
       "extends": "@schematics/angular:library"
