@@ -37,6 +37,10 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     // requirement of Cordova.
     browserOptions.outputPath = join(cordovaBasePath, normalize('www'));
 
+    // Cordova CLI will error if `www` is missing. The Angular CLI deletes it
+    // by default. Let's keep it around.
+    browserOptions.deleteOutputPath = false;
+
     if (options.cordovaAssets) {
       const platformWWWPath = join(cordovaBasePath, normalize(`platforms/${options.platform}/platform_www`));
 
