@@ -15,10 +15,6 @@
       "type": "string",
       "description": "Cordova platform to use during serve."
     },
-    "proxyConfig": {
-      "type": "string",
-      "description": "Proxy configuration file."
-    },
     "ssl": {
       "type": "boolean",
       "description": "Serve using HTTPS.",
