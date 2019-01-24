@@ -1,6 +1,7 @@
 {
   "extends": "tslint-ionic-rules/strict",
   "rules": {
-    "strict-boolean-conditions": false
+    "strict-boolean-conditions": false,
+    "no-null-keyword": false
   }
 }

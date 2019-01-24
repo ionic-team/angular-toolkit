@@ -18,7 +18,7 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     let browserConfig = this.context.architect.getBuilderConfiguration<BrowserBuilderSchema>(browserTargetSpec);
     let browserDescription: BuilderDescription;
 
-    return of(null).pipe(// tslint:disable-line:no-null-keyword
+    return of(null).pipe(
       concatMap(() => this.context.architect.getBuilderDescription(browserConfig)),
       tap(description => browserDescription = description),
       concatMap(() => this.context.architect.validateBuilderOptions(browserConfig, browserDescription)),

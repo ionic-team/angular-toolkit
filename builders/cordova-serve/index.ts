@@ -2,7 +2,7 @@ import { BuildEvent, Builder, BuilderConfiguration, BuilderContext, BuilderDescr
 import { BrowserBuilderSchema } from '@angular-devkit/build-angular/src/browser/schema';
 import { DevServerBuilder, DevServerBuilderOptions } from '@angular-devkit/build-angular/src/dev-server';
 import { Path, virtualFs } from '@angular-devkit/core';
-import * as ζfs from 'fs';
+import * as fs from 'fs';
 import { Observable, of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 
@@ -51,7 +51,7 @@ class CordovaDevServerBuilder extends DevServerBuilder {
     super(context);
   }
 
-  buildWebpackConfig(root: Path, projectRoot: Path, host: virtualFs.Host<ζfs.Stats>, browserOptions: BrowserBuilderSchema) {
+  buildWebpackConfig(root: Path, projectRoot: Path, host: virtualFs.Host<fs.Stats>, browserOptions: BrowserBuilderSchema) {
     const builder = new CordovaBuildBuilder(this.context);
     builder.prepareBrowserConfig(this.cordovaBuildOptions, browserOptions);
 
