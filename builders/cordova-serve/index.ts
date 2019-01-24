@@ -14,8 +14,10 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
   constructor(public context: BuilderContext) {}
 
   run(builderConfig: BuilderConfiguration<CordovaServeBuilderSchema>): Observable<BuildEvent> {
-    const [ project, target, configuration ] = builderConfig.options.devServerTarget.split(':');
-    const { port, host, ssl, proxyConfig } = builderConfig.options;
+    const { options: cordovaServeOptions } = builderConfig;
+    const { devServerTarget, port, host, ssl, proxyConfig } = cordovaServeOptions;
+    const [ project, target, configuration ] = devServerTarget.split(':');
+
     const devServerTargetSpec = { project, target, configuration, overrides: { port, host, ssl, proxyConfig } };
     const devServerBuilderConfig = this.context.architect.getBuilderConfiguration<DevServerBuilderOptions>(devServerTargetSpec);
 
@@ -25,7 +27,7 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
     return this.context.architect.getBuilderDescription(devServerBuilderConfig).pipe(
       tap(description => devServerDescription = description),
       concatMap(() => this.context.architect.validateBuilderOptions(devServerBuilderConfig, devServerDescription)),
-      concatMap(() => this._getCordovaBuildConfig(builderConfig.options)),
+      concatMap(() => this._getCordovaBuildConfig(cordovaServeOptions)),
       tap(config => cordovaBuildConfig = config),
       concatMap(() => of(new CordovaDevServerBuilder(this.context, cordovaBuildConfig.options))),
       concatMap(builder => builder.run(devServerBuilderConfig))
