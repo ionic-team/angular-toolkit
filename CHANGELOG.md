@@ -1,3 +1,12 @@
+## [1.2.3](https://github.com/ionic-team/angular-toolkit/compare/v1.2.2...v1.2.3) (2019-01-24)
+
+
+### Bug Fixes
+
+* **application:** add e2e schematics to fulfill `ng g app` ([fc1421e](https://github.com/ionic-team/angular-toolkit/commit/fc1421e))
+* **build:** never delete output path ([b614db9](https://github.com/ionic-team/angular-toolkit/commit/b614db9))
+* **serve:** use proxyConfig option from serve ([859ce96](https://github.com/ionic-team/angular-toolkit/commit/859ce96))
+
 ## [1.2.2](https://github.com/ionic-team/angular-toolkit/compare/v1.2.1...v1.2.2) (2018-12-21)
 
 

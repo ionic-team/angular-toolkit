@@ -18,7 +18,7 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     let browserConfig = this.context.architect.getBuilderConfiguration<BrowserBuilderSchema>(browserTargetSpec);
     let browserDescription: BuilderDescription;
 
-    return of(null).pipe(// tslint:disable-line:no-null-keyword
+    return of(null).pipe(
       concatMap(() => this.context.architect.getBuilderDescription(browserConfig)),
       tap(description => browserDescription = description),
       concatMap(() => this.context.architect.validateBuilderOptions(browserConfig, browserDescription)),
@@ -36,6 +36,10 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     // We always need to output the build to `www` because it is a hard
     // requirement of Cordova.
     browserOptions.outputPath = join(cordovaBasePath, normalize('www'));
+
+    // Cordova CLI will error if `www` is missing. The Angular CLI deletes it
+    // by default. Let's keep it around.
+    browserOptions.deleteOutputPath = false;
 
     if (options.cordovaAssets) {
       const platformWWWPath = join(cordovaBasePath, normalize(`platforms/${options.platform}/platform_www`));
