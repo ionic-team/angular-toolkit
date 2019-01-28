@@ -23,11 +23,15 @@
       "type": "boolean",
       "description": "Bundle Cordova assets with build",
       "default": true
+    },
+    "cordovaMock": {
+      "type": "boolean",
+      "description": "Bundle empty cordova.js with build",
+      "default": false
     }
   },
   "additionalProperties": false,
   "required": [
-    "browserTarget",
-    "platform"
+    "browserTarget"
   ]
 }

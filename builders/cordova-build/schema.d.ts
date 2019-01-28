@@ -1,7 +1,8 @@
 export interface CordovaBuildBuilderSchema {
   browserTarget: string;
-  platform: string;
+  platform?: string;
   cordovaBasePath?: string;
   sourceMap?: boolean;
   cordovaAssets?: boolean;
+  cordovaMock?: boolean;
 }
