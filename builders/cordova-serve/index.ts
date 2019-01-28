@@ -36,9 +36,9 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
   }
 
   protected _getCordovaBuildConfig(cordovaServeOptions: CordovaServeBuilderSchema): Observable<BuilderConfiguration<CordovaBuildBuilderSchema>> {
-    const { platform, cordovaAssets, cordovaMock } = cordovaServeOptions;
+    const { platform, cordovaBasePath, cordovaAssets, cordovaMock } = cordovaServeOptions;
     const [ project, target, configuration ] = cordovaServeOptions.cordovaBuildTarget.split(':');
-    const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform, cordovaAssets, cordovaMock } };
+    const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform, cordovaBasePath, cordovaAssets, cordovaMock } };
     const cordovaBuildTargetConfig = this.context.architect.getBuilderConfiguration<CordovaBuildBuilderSchema>(cordovaBuildTargetSpec);
 
     return this.context.architect.getBuilderDescription(cordovaBuildTargetConfig).pipe(
