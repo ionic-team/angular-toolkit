@@ -35,7 +35,7 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
     );
   }
 
-https://github.com/ionic-team/angular-toolkit/pull/57  protected _getCordovaBuildConfig(cordovaServeOptions: CordovaServeBuilderSchema): Observable<BuilderConfiguration<CordovaBuildBuilderSchema>> {
+  protected _getCordovaBuildConfig(cordovaServeOptions: CordovaServeBuilderSchema): Observable<BuilderConfiguration<CordovaBuildBuilderSchema>> {
     const { platform, cordovaBasePath, cordovaAssets, cordovaMock } = cordovaServeOptions;
     const [ project, target, configuration ] = cordovaServeOptions.cordovaBuildTarget.split(':');
     const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform, cordovaBasePath, cordovaAssets, cordovaMock } };
