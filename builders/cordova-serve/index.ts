@@ -1,5 +1,5 @@
 import { BuildEvent, Builder, BuilderConfiguration, BuilderContext, BuilderDescription } from '@angular-devkit/architect';
-import { BrowserBuilderSchema } from '@angular-devkit/build-angular/src/browser/schema';
+import { NormalizedBrowserBuilderSchema } from '@angular-devkit/build-angular/src/browser/schema';
 import { DevServerBuilder, DevServerBuilderOptions } from '@angular-devkit/build-angular/src/dev-server';
 import { Path, virtualFs } from '@angular-devkit/core';
 import * as fs from 'fs';
@@ -52,7 +52,7 @@ class CordovaDevServerBuilder extends DevServerBuilder {
     super(context);
   }
 
-  buildWebpackConfig(root: Path, projectRoot: Path, host: virtualFs.Host<fs.Stats>, browserOptions: BrowserBuilderSchema) {
+  buildWebpackConfig(root: Path, projectRoot: Path, host: virtualFs.Host<fs.Stats>, browserOptions: NormalizedBrowserBuilderSchema) {
     const builder = new CordovaBuildBuilder(this.context);
     builder.prepareBrowserConfig(this.cordovaBuildOptions, browserOptions);
 
