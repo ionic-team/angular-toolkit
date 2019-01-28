@@ -23,10 +23,23 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
       tap(description => browserDescription = description),
       concatMap(() => this.context.architect.validateBuilderOptions(browserConfig, browserDescription)),
       tap(config => browserConfig = config),
+      tap(() => this.validateBuilderConfig(builderConfig.options)),
       tap(() => this.prepareBrowserConfig(builderConfig.options, browserConfig.options)),
       concatMap(() => of(this.context.architect.getBuilder(browserDescription, this.context))),
       concatMap(builder => builder.run(browserConfig))
     );
+  }
+
+  // Mutates builderOptions
+  validateBuilderConfig(builderOptions: CordovaBuildBuilderSchema) {
+    // if we're mocking cordova.js, don't build cordova bundle
+    if (builderOptions.cordovaMock) {
+      builderOptions.cordovaAssets = false;
+    }
+
+    if (builderOptions.cordovaAssets && !builderOptions.platform) {
+      throw new Error('The `--platform` option is required with `--cordova-assets`');
+    }
   }
 
   // Mutates browserOptions
@@ -41,7 +54,13 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     // by default. Let's keep it around.
     browserOptions.deleteOutputPath = false;
 
-    if (options.cordovaAssets) {
+    if (options.cordovaMock) {
+      browserOptions.scripts.push({
+        input: getSystemPath(join(normalize(__dirname), normalize('cordova.js'))),
+        bundleName: 'cordova',
+        lazy: false,
+      });
+    } else if (options.cordovaAssets) {
       const platformWWWPath = join(cordovaBasePath, normalize(`platforms/${options.platform}/platform_www`));
 
       // Add Cordova www assets that were generated whenever platform(s) and

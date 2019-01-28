@@ -36,9 +36,9 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
   }
 
   protected _getCordovaBuildConfig(cordovaServeOptions: CordovaServeBuilderSchema): Observable<BuilderConfiguration<CordovaBuildBuilderSchema>> {
-    const { platform } = cordovaServeOptions;
+    const { platform, cordovaAssets, cordovaMock } = cordovaServeOptions;
     const [ project, target, configuration ] = cordovaServeOptions.cordovaBuildTarget.split(':');
-    const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform } };
+    const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform, cordovaAssets, cordovaMock } };
     const cordovaBuildTargetConfig = this.context.architect.getBuilderConfiguration<CordovaBuildBuilderSchema>(cordovaBuildTargetSpec);
 
     return this.context.architect.getBuilderDescription(cordovaBuildTargetConfig).pipe(
@@ -54,6 +54,7 @@ class CordovaDevServerBuilder extends DevServerBuilder {
 
   buildWebpackConfig(root: Path, projectRoot: Path, host: virtualFs.Host<fs.Stats>, browserOptions: NormalizedBrowserBuilderSchema) {
     const builder = new CordovaBuildBuilder(this.context);
+    builder.validateBuilderConfig(this.cordovaBuildOptions);
     builder.prepareBrowserConfig(this.cordovaBuildOptions, browserOptions);
 
     return super.buildWebpackConfig(root, projectRoot, host, browserOptions);
