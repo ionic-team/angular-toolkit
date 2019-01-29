@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/ionic-team/angular-toolkit/compare/v1.2.3...v1.3.0) (2019-01-29)
+
+
+### Bug Fixes
+
+* **serve:** pass `cordovaBasePath` to cordova-build builder ([#57](https://github.com/ionic-team/angular-toolkit/issues/57)) ([93e3bbe](https://github.com/ionic-team/angular-toolkit/commit/93e3bbe))
+
+
+### Features
+
+* **build:** add `--cordova-mock` option ([#63](https://github.com/ionic-team/angular-toolkit/issues/63)) ([a659636](https://github.com/ionic-team/angular-toolkit/commit/a659636))
+
 ## [1.2.3](https://github.com/ionic-team/angular-toolkit/compare/v1.2.2...v1.2.3) (2019-01-24)
 
 
