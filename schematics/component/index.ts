@@ -8,19 +8,9 @@ import { buildDefaultPath, getProject } from '@schematics/angular/utility/projec
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
 import * as ts from 'typescript';
 
+import { buildSelector } from '../util';
+
 import { Schema as ComponentOptions } from './schema';
-
-function buildSelector(options: ComponentOptions, projectPrefix: string) {
-  let selector = strings.dasherize(options.name);
-
-  if (options.prefix) {
-    selector = `${options.prefix}-${selector}`;
-  } else if (options.prefix === undefined && projectPrefix) {
-    selector = `${projectPrefix}-${selector}`;
-  }
-
-  return selector;
-}
 
 function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
   const text = host.read(modulePath);

@@ -10,16 +10,9 @@
     "pretty": true,
     "strict": true,
     "target": "es2017",
-    "lib": [
-      "es2017"
-    ]
+    "lib": ["es2017"],
+    "plugins": [{ "name": "typescript-tslint-plugin" }]
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__/*.ts",
-    "schematics/*/files"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "**/__tests__/*.ts", "schematics/*/files"]
 }
