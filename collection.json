@@ -12,7 +12,9 @@
     },
     "component": {
       "aliases": ["c"],
-      "extends": "@schematics/angular:component"
+      "factory": "./schematics/component",
+      "description": "Create an Angular component.",
+      "schema": "./schematics/component/schema.json"
     },
     "directive": {
       "aliases": ["d"],
