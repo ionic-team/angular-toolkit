@@ -61,12 +61,12 @@
     },
     "createModule":  {
       "type": "boolean",
-      "description": "Allows creating a module for the component",
+      "description": "Allows creating an NgModule for the component",
       "default": false
     },
     "module": {
       "type": "string",
-      "description": "Allows adding to a modules imports or declarations"
+      "description": "Allows adding to an NgModule's imports or declarations"
     },
     "export": {
       "type": "boolean",
