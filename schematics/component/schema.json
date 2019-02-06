@@ -59,10 +59,24 @@
       "format": "html-selector",
       "description": "The selector to use for the page"
     },
-    "module":  {
+    "createModule":  {
+      "type": "boolean",
+      "description": "Allows creating a module for the component",
+      "default": false
+    },
+    "module": {
       "type": "string",
-      "description": "Allows specification of the declaring module",
-      "alias": "m"
+      "description": "Allows adding to a modules imports or declarations"
+    },
+    "export": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, the declaring NgModule exports this component."
+    },
+    "entryComponent": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, the new component is the entry component of the declaring NgModule."
     }
   },
   "required": []

@@ -7,5 +7,8 @@ export interface Schema {
   spec?: boolean;
   flat?: boolean;
   selector?: string;
+  createModule?: boolean;
   module?: string;
+  export?: boolean;
+  entryComponent?: boolean;
 }
