@@ -8,6 +8,8 @@ import { buildDefaultPath, getProject } from '@schematics/angular/utility/projec
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
 import * as ts from 'typescript';
 
+import { buildSelector } from '../util';
+
 import { Schema as PageOptions } from './schema';
 
 function findRoutingModuleFromOptions(host: Tree, options: ModuleOptions): Path | undefined {
@@ -135,18 +137,6 @@ function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, rout
   }
 
   return [];
-}
-
-function buildSelector(options: PageOptions, projectPrefix: string) {
-  let selector = strings.dasherize(options.name);
-
-  if (options.prefix) {
-    selector = `${options.prefix}-${selector}`;
-  } else if (options.prefix === undefined && projectPrefix) {
-    selector = `${projectPrefix}-${selector}`;
-  }
-
-  return selector;
 }
 
 export default function(options: PageOptions): Rule {
