@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/ionic-team/angular-toolkit/compare/v1.3.0...v1.4.0) (2019-02-13)
+
+
+### Features
+
+* **component:** add custom component schematic ([#68](https://github.com/ionic-team/angular-toolkit/issues/68)) ([527f54e](https://github.com/ionic-team/angular-toolkit/commit/527f54e))
+
 # [1.3.0](https://github.com/ionic-team/angular-toolkit/compare/v1.2.3...v1.3.0) (2019-01-29)
 
 
