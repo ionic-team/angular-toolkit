@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { <%= classify(name) %>Page } from './<%= dasherize(name) %>.page';
+import { <%= classify(name) %>Component } from './<%= dasherize(name) %>.component';
 
-describe('<%= classify(name) %>Page', () => {
-  let component: <%= classify(name) %>Page;
-  let fixture: ComponentFixture<<%= classify(name) %>Page>;
+describe('<%= classify(name) %>Component', () => {
+  let component: <%= classify(name) %>Component;
+  let fixture: ComponentFixture<<%= classify(name) %>Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ <%= classify(name) %>Page ],
+      declarations: [ <%= classify(name) %>Component ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(<%= classify(name) %>Page);
+    fixture = TestBed.createComponent(<%= classify(name) %>Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
