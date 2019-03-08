@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import { Observable, of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 
+import { createConsoleLogServer } from '../../assets/log-server';
 import { CordovaBuildBuilder, CordovaBuildBuilderSchema } from '../cordova-build';
 
 import { CordovaServeBuilderSchema } from './schema';
@@ -36,9 +37,9 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
   }
 
   protected _getCordovaBuildConfig(cordovaServeOptions: CordovaServeBuilderSchema): Observable<BuilderConfiguration<CordovaBuildBuilderSchema>> {
-    const { platform, cordovaBasePath, cordovaAssets, cordovaMock } = cordovaServeOptions;
+    const { platform, cordovaBasePath, cordovaAssets, cordovaMock, consolelogs, consolelogsPort } = cordovaServeOptions;
     const [ project, target, configuration ] = cordovaServeOptions.cordovaBuildTarget.split(':');
-    const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform, cordovaBasePath, cordovaAssets, cordovaMock } };
+    const cordovaBuildTargetSpec = { project, target, configuration, overrides: { platform, cordovaBasePath, cordovaAssets, cordovaMock, consolelogs, consolelogsPort } };
     const cordovaBuildTargetConfig = this.context.architect.getBuilderConfiguration<CordovaBuildBuilderSchema>(cordovaBuildTargetSpec);
 
     return this.context.architect.getBuilderDescription(cordovaBuildTargetConfig).pipe(
@@ -50,6 +51,14 @@ export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
 class CordovaDevServerBuilder extends DevServerBuilder {
   constructor(context: BuilderContext, public cordovaBuildOptions: CordovaBuildBuilderSchema) {
     super(context);
+  }
+
+  run(builderConfig: BuilderConfiguration<DevServerBuilderOptions>): Observable<BuildEvent> {
+    if (this.cordovaBuildOptions.consolelogs && this.cordovaBuildOptions.consolelogsPort) {
+      createConsoleLogServer(builderConfig.options.host, this.cordovaBuildOptions.consolelogsPort)
+        .catch(err => process.stderr.write(`There was an error starting the console log server: ${err}\n`));
+    }
+    return super.run(builderConfig);
   }
 
   buildWebpackConfig(root: Path, projectRoot: Path, host: virtualFs.Host<fs.Stats>, browserOptions: NormalizedBrowserBuilderSchema) {
