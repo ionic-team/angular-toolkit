@@ -3,12 +3,12 @@ import { NormalizedBrowserBuilderSchema } from '@angular-devkit/build-angular/sr
 import { DevServerBuilder, DevServerBuilderOptions } from '@angular-devkit/build-angular/src/dev-server';
 import { Path, virtualFs } from '@angular-devkit/core';
 import * as fs from 'fs';
-import { Observable, of } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 
-import { createConsoleLogServer } from '../../assets/log-server';
 import { CordovaBuildBuilder, CordovaBuildBuilderSchema } from '../cordova-build';
 
+import { createConsoleLogServer } from './log-server';
 import { CordovaServeBuilderSchema } from './schema';
 
 export class CordovaServeBuilder implements Builder<CordovaServeBuilderSchema> {
@@ -55,8 +55,8 @@ class CordovaDevServerBuilder extends DevServerBuilder {
 
   run(builderConfig: BuilderConfiguration<DevServerBuilderOptions>): Observable<BuildEvent> {
     if (this.cordovaBuildOptions.consolelogs && this.cordovaBuildOptions.consolelogsPort) {
-      createConsoleLogServer(builderConfig.options.host, this.cordovaBuildOptions.consolelogsPort)
-        .catch(err => process.stderr.write(`There was an error starting the console log server: ${err}\n`));
+      return from(createConsoleLogServer(builderConfig.options.host, this.cordovaBuildOptions.consolelogsPort))
+        .pipe(_ => super.run(builderConfig));
     }
     return super.run(builderConfig);
   }

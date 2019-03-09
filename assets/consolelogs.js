@@ -1,3 +1,5 @@
+// Script injected by @ionic/angular-toolkit to send console logs back
+// to a websocket server so they can be printed to the terminal
 window.Ionic = window.Ionic || {}; window.Ionic.ConsoleLogServer = {
   start: function(config) {
     var self = this;

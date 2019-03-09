@@ -9,11 +9,11 @@
     },
     "consolelogs": {
       "type": "boolean",
-      "description": "Print app console logs to Ionic CLI"
+      "description": "Print console logs to the terminal."
     },
     "consolelogsPort": {
       "type": "number",
-      "description": "Port for console log server",
+      "description": "Port for console log server.",
       "default": 53703
     },
     "devServerTarget": {

@@ -1,6 +1,6 @@
-import chalk, { Chalk } from 'chalk';
+import { terminal } from '@angular-devkit/core';
 import * as util from 'util';
-import * as ζws from 'ws';
+import * as WebSocket from 'ws';
 
 export interface ConsoleLogServerMessage {
   category: 'console';
@@ -20,9 +20,7 @@ export function isConsoleLogServerMessage(m: any): m is ConsoleLogServerMessage 
     && m.data && typeof m.data.length === 'number';
 }
 
-export async function createConsoleLogServer(host: string, port: number): Promise<ζws.Server> {
-  const WebSocket = await import('ws');
-
+export async function createConsoleLogServer(host: string, port: number): Promise<WebSocket.Server> {
   const wss = new WebSocket.Server({ host, port });
 
   wss.on('connection', ws => {
@@ -33,25 +31,25 @@ export async function createConsoleLogServer(host: string, port: number): Promis
         data = data.toString();
         msg = JSON.parse(data);
       } catch (e) {
-        process.stderr.write(`Error parsing JSON message from client: "${data}" ${chalk.red(e.stack ? e.stack : e)}\n`);
+        process.stderr.write(`Error parsing JSON message from client: "${data}" ${terminal.red(e.stack ? e.stack : e)}\n`);
         return;
       }
 
       if (!isConsoleLogServerMessage(msg)) {
-        const m = util.inspect(msg, { colors: chalk.enabled });
+        const m = util.inspect(msg, { colors: true });
         process.stderr.write(`Bad format in client message: ${m}\n`);
         return;
       }
 
       if (msg.category === 'console') {
-        let status: Chalk | undefined; // unknown levels are normal color
+        let status: ((_: string) => string) | undefined;
 
         if (msg.type === 'info' || msg.type === 'log') {
-          status = chalk.reset;
+          status = terminal.reset;
         } else if (msg.type === 'error') {
-          status = chalk.red;
+          status = terminal.red;
         } else if (msg.type === 'warn') {
-          status = chalk.yellow;
+          status = terminal.yellow;
         }
 
         // pretty print objects and arrays (no newlines for arrays)
