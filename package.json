@@ -31,7 +31,6 @@
   ],
   "dependencies": {
     "@schematics/angular": "^7.0.3",
-    "chalk": "^2.4.2",
     "tslib": "^1.9.0",
     "typescript": "^3.2.4",
     "ws": "^6.1.4"
