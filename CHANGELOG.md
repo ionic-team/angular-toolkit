@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/ionic-team/angular-toolkit/compare/v1.4.1...v1.5.0) (2019-03-21)
+
+
+### Bug Fixes
+
+* **cordova:** obey `--source-map` for production builds ([23481bd](https://github.com/ionic-team/angular-toolkit/commit/23481bd))
+
+
+### Features
+
+* **cordova-serve:** support --consolelogs option ([#100](https://github.com/ionic-team/angular-toolkit/issues/100)) ([07af906](https://github.com/ionic-team/angular-toolkit/commit/07af906))
+
 ## [1.4.1](https://github.com/ionic-team/angular-toolkit/compare/v1.4.0...v1.4.1) (2019-03-19)
 
 
