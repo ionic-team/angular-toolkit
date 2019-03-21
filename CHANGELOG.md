@@ -1,3 +1,11 @@
+## [1.4.1](https://github.com/ionic-team/angular-toolkit/compare/v1.4.0...v1.4.1) (2019-03-19)
+
+
+### Bug Fixes
+
+* **page:** remove padding attribute in ion-content template ([#106](https://github.com/ionic-team/angular-toolkit/issues/106)) ([c33f932](https://github.com/ionic-team/angular-toolkit/commit/c33f932))
+* **schematics:** update component spec ([#88](https://github.com/ionic-team/angular-toolkit/issues/88)) ([f19e6d8](https://github.com/ionic-team/angular-toolkit/commit/f19e6d8))
+
 # [1.4.0](https://github.com/ionic-team/angular-toolkit/compare/v1.3.0...v1.4.0) (2019-02-13)
 
 
