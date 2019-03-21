@@ -9,4 +9,6 @@ export interface CordovaServeBuilderSchema {
   sourceMap?: boolean;
   cordovaAssets?: boolean;
   cordovaMock?: boolean;
+  consolelogs?: boolean;
+  consolelogsPort?: number;
 }

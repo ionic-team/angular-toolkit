@@ -5,4 +5,6 @@ export interface CordovaBuildBuilderSchema {
   sourceMap?: boolean;
   cordovaAssets?: boolean;
   cordovaMock?: boolean;
+  consolelogs?: boolean;
+  consolelogsPort?: number;
 }

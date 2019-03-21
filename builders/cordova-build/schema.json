@@ -7,6 +7,15 @@
       "type": "string",
       "description": "Target to build."
     },
+    "consolelogs": {
+      "type": "boolean",
+      "description": "Inject script to print console logs to the terminal."
+    },
+    "consolelogsPort": {
+      "type": "number",
+      "description": "Port for console log server.",
+      "default": 53703
+    },
     "platform": {
       "type": "string",
       "description": "Cordova platform to use during build."

@@ -7,6 +7,15 @@
       "type": "string",
       "description": "Target to use for build."
     },
+    "consolelogs": {
+      "type": "boolean",
+      "description": "Print console logs to the terminal."
+    },
+    "consolelogsPort": {
+      "type": "number",
+      "description": "Port for console log server.",
+      "default": 53703
+    },
     "devServerTarget": {
       "type": "string",
       "description": "Target to use for serve."

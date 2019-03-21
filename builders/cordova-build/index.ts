@@ -1,6 +1,7 @@
 import { BuildEvent, Builder, BuilderConfiguration, BuilderContext, BuilderDescription } from '@angular-devkit/architect';
 import { BrowserBuilderSchema } from '@angular-devkit/build-angular/src/browser/schema';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
+import { writeFileSync } from 'fs';
 import { Observable, of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 
@@ -54,9 +55,27 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     // by default. Let's keep it around.
     browserOptions.deleteOutputPath = false;
 
+    if (options.consolelogs) {
+      // Write the config to a file, and then include that in the bundle so it loads on window
+      const configPath = getSystemPath(join(normalize(__dirname), '../../assets', normalize('consolelog-config.js')));
+      writeFileSync(configPath, `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`);
+
+      browserOptions.scripts.push({
+        input: configPath,
+        bundleName: 'consolelogs',
+        lazy: false,
+      });
+
+      browserOptions.scripts.push({
+        input: getSystemPath(join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))),
+        bundleName: 'consolelogs',
+        lazy: false,
+      });
+    }
+
     if (options.cordovaMock) {
       browserOptions.scripts.push({
-        input: getSystemPath(join(normalize(__dirname), normalize('cordova.js'))),
+        input: getSystemPath(join(normalize(__dirname), '../../assets', normalize('cordova.js'))),
         bundleName: 'cordova',
         lazy: false,
       });
