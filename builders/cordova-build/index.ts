@@ -48,7 +48,7 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
     const cordovaBasePath = normalize(options.cordovaBasePath ? options.cordovaBasePath : '.');
 
     if (typeof options.sourceMap !== 'undefined') {
-        browserOptions.sourceMap = options.sourceMap as any;
+      browserOptions.sourceMap = options.sourceMap;
     }
 
     // We always need to output the build to `www` because it is a hard
