@@ -47,7 +47,7 @@ export class CordovaBuildBuilder implements Builder<CordovaBuildBuilderSchema> {
   prepareBrowserConfig(options: CordovaBuildBuilderSchema, browserOptions: BrowserBuilderSchema) {
     const cordovaBasePath = normalize(options.cordovaBasePath ? options.cordovaBasePath : '.');
 
-    if (typeof options.sourceMap !== 'undefined' && options.sourceMap != null) {
+    if (typeof options.sourceMap !== 'undefined') {
         browserOptions.sourceMap = options.sourceMap as any;
     }
 
