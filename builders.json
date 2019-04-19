@@ -1,10 +1,13 @@
 {
   "builders": {
     "cordova-build": {
+      "implementation": "./builders/cordova-build/index2",
       "class": "./builders/cordova-build",
       "schema": "./builders/cordova-build/schema.json",
       "description": "Perform a browser build with Cordova assets."
     },
+
+
     "cordova-serve": {
       "class": "./builders/cordova-serve",
       "schema": "./builders/cordova-serve/schema.json",
