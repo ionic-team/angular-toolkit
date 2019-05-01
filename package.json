@@ -33,7 +33,7 @@
     "@schematics/angular": "^7.0.3",
     "tslib": "^1.9.0",
     "typescript": "~3.3.3333",
-    "ws": "^6.1.4"
+    "ws": "^7.0.0"
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.13.6",
