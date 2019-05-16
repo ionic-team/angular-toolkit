@@ -9,8 +9,11 @@ export async function buildCordova(
   context: BuilderContext
 ) {
     context.reportStatus(`running cordova build...`);
+    // Get angular browser build target
     const browserTargetSpec = targetFromTargetString(options.browserTarget);
+    // Get browser build options
     const browserBuildTargetOptions = await context.getTargetOptions(browserTargetSpec);
+
     const formattedOptions = validateBuilderConfig(options);
     const newOptions = prepareBrowserConfig(formattedOptions, browserBuildTargetOptions);
     const browserBuild = await context.scheduleTarget(browserTargetSpec, newOptions);

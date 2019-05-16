@@ -36,10 +36,10 @@
     "ws": "^6.1.4"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.800.0-beta.15",
-    "@angular-devkit/build-angular": "0.800.0-beta.15",
-    "@angular-devkit/core": "8.0.0-beta.15",
-    "@angular-devkit/schematics": "8.0.0-beta.15",
+    "@angular-devkit/architect": "0.800.0-rc.3",
+    "@angular-devkit/build-angular": "0.800.0-rc.3",
+    "@angular-devkit/core": "8.0.0-rc.3",
+    "@angular-devkit/schematics": "8.0.0-rc.3",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.4",
     "@semantic-release/github": "^5.0.6",

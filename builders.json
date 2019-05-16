@@ -9,7 +9,7 @@
 
 
     "cordova-serve": {
-      "class": "./builders/cordova-serve",
+      "implementation": "./builders/cordova-serve/index2",
       "schema": "./builders/cordova-serve/schema.json",
       "description": "Run the dev-server with Cordova assets."
     }
