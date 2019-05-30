@@ -4,7 +4,9 @@ import { writeFileSync } from 'fs';
 import { CordovaBuildBuilderSchema } from '../cordova-build/schema';
 import { CordovaServeBuilderSchema } from '../cordova-serve/schema';
 
-export function validateBuilderConfig(builderOptions: CordovaBuildBuilderSchema) {
+export function validateBuilderConfig(
+  builderOptions: CordovaBuildBuilderSchema
+) {
   // if we're mocking cordova.js, don't build cordova bundle
   const newOptions = { ...builderOptions };
   if (newOptions.cordovaMock) {
@@ -28,7 +30,9 @@ export function prepareBrowserConfig(
     options.cordovaBasePath ? options.cordovaBasePath : '.'
   );
 
-  optionsStarter.sourceMap = options.sourceMap;
+  if (typeof options.sourceMap !== 'undefined') {
+    optionsStarter.sourceMap = options.sourceMap;
+  }
 
   // We always need to output the build to `www` because it is a hard
   // requirement of Cordova.
@@ -54,7 +58,7 @@ export function prepareBrowserConfig(
     writeFileSync(
       configPath,
       `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${
-      options.consolelogsPort
+        options.consolelogsPort
       } }`
     );
     if (optionsStarter.scripts) {
