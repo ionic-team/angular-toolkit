@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/ionic-team/angular-toolkit/compare/v1.5.0...v1.5.1) (2019-04-09)
+
+
+### Bug Fixes
+
+* **cordova-build:** only set sourceMap if specified ([#107](https://github.com/ionic-team/angular-toolkit/issues/107)) ([2a99ac0](https://github.com/ionic-team/angular-toolkit/commit/2a99ac0))
+
 # [1.5.0](https://github.com/ionic-team/angular-toolkit/compare/v1.4.1...v1.5.0) (2019-03-21)
 
 
