@@ -1,6 +1,6 @@
 {
   "name": "@ionic/angular-toolkit",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "Schematics and builders for @ionic/angular apps.",
   "homepage": "https://ionicframework.com/",
   "author": "Ionic Team <hi@ionicframework.com> (https://ionicframework.com)",
@@ -30,16 +30,16 @@
     "ionicframework"
   ],
   "dependencies": {
-    "@schematics/angular": "^7.0.3",
+    "@schematics/angular": "8.0.0",
     "tslib": "^1.9.0",
     "typescript": "~3.3.3333",
     "ws": "^6.1.4"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.800.0-rc.3",
-    "@angular-devkit/build-angular": "0.800.0-rc.3",
-    "@angular-devkit/core": "8.0.0-rc.3",
-    "@angular-devkit/schematics": "8.0.0-rc.3",
+    "@angular-devkit/architect": "0.800.0",
+    "@angular-devkit/build-angular": "0.800.0",
+    "@angular-devkit/core": "8.0.0",
+    "@angular-devkit/schematics": "8.0.0",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.4",
     "@semantic-release/github": "^5.0.6",
@@ -59,10 +59,10 @@
     "typescript-tslint-plugin": "0.3.1"
   },
   "peerDependencies": {
-    "@angular-devkit/architect": "0.800.0-beta.15",
-    "@angular-devkit/build-angular": "0.800.0-beta.15",
-    "@angular-devkit/core": "8.0.0-beta.15",
-    "@angular-devkit/schematics": "8.0.0-beta.15"
+    "@angular-devkit/architect": "0.800.0",
+    "@angular-devkit/build-angular": "0.800.0",
+    "@angular-devkit/core": "8.0.0",
+    "@angular-devkit/schematics": "8.0.0"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
