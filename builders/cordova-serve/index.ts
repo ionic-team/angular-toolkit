@@ -1,5 +1,4 @@
 import { BuilderContext, BuilderOutput, createBuilder, targetFromTargetString } from '@angular-devkit/architect';
-import { DevServerBuilderOutput } from '@angular-devkit/build-angular';
 import { json } from '@angular-devkit/core';
 
 import { prepareBrowserConfig } from '../utils';
@@ -40,4 +39,4 @@ export async function serveCordova(
       .then(buildEvent => ({ ...buildEvent }));
   });
 }
-export default createBuilder<CordovaDevServerBuilderOptions, DevServerBuilderOutput>(serveCordova);
+export default createBuilder<CordovaDevServerBuilderOptions, any>(serveCordova);
