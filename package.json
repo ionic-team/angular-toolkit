@@ -30,7 +30,7 @@
     "ionicframework"
   ],
   "dependencies": {
-    "@schematics/angular": "^7.0.3",
+    "@schematics/angular": "^8.0.4",
     "tslib": "^1.9.0",
     "typescript": "~3.3.3333",
     "ws": "^6.1.4"
