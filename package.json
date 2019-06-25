@@ -30,16 +30,16 @@
     "ionicframework"
   ],
   "dependencies": {
-    "@schematics/angular": "^7.0.3",
+    "@schematics/angular": "^8.0.0",
     "tslib": "^1.9.0",
-    "typescript": "~3.3.3333",
+    "typescript": "3.4.3",
     "ws": "^6.1.4"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.13.6",
-    "@angular-devkit/build-angular": "0.13.6",
-    "@angular-devkit/core": "7.3.6",
-    "@angular-devkit/schematics": "7.3.6",
+    "@angular-devkit/architect": ">=0.800.0",
+    "@angular-devkit/build-angular": ">=0.800.0",
+    "@angular-devkit/core": ">=8.0.0",
+    "@angular-devkit/schematics": ">=8.0.0",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.4",
     "@semantic-release/github": "^5.0.6",
@@ -59,10 +59,10 @@
     "typescript-tslint-plugin": "0.3.1"
   },
   "peerDependencies": {
-    "@angular-devkit/architect": ">=0.7.2",
-    "@angular-devkit/build-angular": ">=0.7.2",
-    "@angular-devkit/core": ">=0.7.2 <8.0.0",
-    "@angular-devkit/schematics": ">=0.7.2 <8.0.0"
+    "@angular-devkit/architect": ">=0.800.0",
+    "@angular-devkit/build-angular": ">=0.800.0",
+    "@angular-devkit/core": ">=8.0.0",
+    "@angular-devkit/schematics": ">=8.0.0"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
