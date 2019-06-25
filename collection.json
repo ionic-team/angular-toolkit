@@ -6,15 +6,15 @@
       "description": "Create an Ionic page.",
       "schema": "./schematics/page/schema.json"
     },
-    "class": {
-      "aliases": ["cl"],
-      "extends": "@schematics/angular:class"
-    },
     "component": {
       "aliases": ["c"],
       "factory": "./schematics/component",
       "description": "Create an Angular component.",
       "schema": "./schematics/component/schema.json"
+    },
+    "class": {
+      "aliases": ["cl"],
+      "extends": "@schematics/angular:class"
     },
     "directive": {
       "aliases": ["d"],
@@ -54,6 +54,18 @@
     "library": {
       "aliases": ["lib"],
       "extends": "@schematics/angular:library"
+    },
+    "serviceWorker": {
+      "aliases": ["service-worker"],
+      "extends": "@schematics/angular:serviceWorker"
+    },
+    "appShell": {
+      "aliases": ["app-shell"],
+      "extends": "@schematics/angular:appShell"
+    },
+    "webWorker": {
+      "aliases": ["web-worker"],
+      "extends": "@schematics/angular:webWorker"
     }
   }
 }

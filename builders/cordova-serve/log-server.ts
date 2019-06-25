@@ -54,7 +54,6 @@ export async function createConsoleLogServer(host: string, port: number): Promis
 
         // pretty print objects and arrays (no newlines for arrays)
         msg.data = msg.data.map(d => JSON.stringify(d, undefined, d && d.length ? '' : '  '));
-
         if (status) {
           process.stdout.write(`[${status('console.' + msg.type)}]: ${msg.data.join(' ')}\n`);
         } else {
