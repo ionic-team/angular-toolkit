@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/ionic-team/angular-toolkit/compare/v1.5.1...v2.0.0) (2019-06-25)
+
+
+### Features
+
+* support Angular 8 ([#132](https://github.com/ionic-team/angular-toolkit/issues/132)) ([166d547](https://github.com/ionic-team/angular-toolkit/commit/166d547))
+
+
+### BREAKING CHANGES
+
+* this updates dependencies for Angular 8. Users are
+    required to update to 8.0.0 of Angular/Angular CLI in order to use
+    this. In order to migrate, please see https://update.angular.io
+
 ## [1.5.1](https://github.com/ionic-team/angular-toolkit/compare/v1.5.0...v1.5.1) (2019-04-09)
 
 
