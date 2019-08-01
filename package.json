@@ -71,14 +71,6 @@
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": {
-    "linters": {
-      "*.{ts,tsx}": "npm run lint"
-    },
-    "ignore": [
-      "**/__tests__/*.{ts,tsx}"
-    ]
-  },
   "release": {
     "branch": "stable",
     "verifyConditions": [
