@@ -89,8 +89,8 @@ function addRouteToNgModule(options: PageOptions): Rule {
     const relativePath = buildRelativePath(module, pagePath);
 
     const routePath = strings.dasherize(options.routePath ? options.routePath : options.name);
-    const routeLoadChildren = `${relativePath}#${strings.classify(options.name)}PageModule`;
-    const changes = addRouteToRoutesArray(source, module, routePath, routeLoadChildren);
+    const ngModuleName = `${strings.classify(options.name)}PageModule`;
+    const changes = addRouteToRoutesArray(source, module, routePath, relativePath, ngModuleName);
     const recorder = host.beginUpdate(module);
 
     for (const change of changes) {
@@ -105,7 +105,7 @@ function addRouteToNgModule(options: PageOptions): Rule {
   };
 }
 
-function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, routePath: string, routeLoadChildren: string): Change[] {
+function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, routePath: string, routeLoadChildren: string, ngModuleName: string): Change[] {
   const keywords = findNodes(source, ts.SyntaxKind.VariableStatement);
 
   for (const keyword of keywords) {
@@ -129,7 +129,7 @@ function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, rout
           changes.push(new InsertChange(ngModulePath, lastRouteNode.getEnd(), ','));
         }
 
-        changes.push(new InsertChange(ngModulePath, lastRouteNode.getEnd() + 1, `  { path: '${routePath}', loadChildren: '${routeLoadChildren}' }${trailingCommaFound ? ',' : ''}\n`));
+        changes.push(new InsertChange(ngModulePath, lastRouteNode.getEnd() + 1, `  {\n    path: '${routePath}',\n    loadChildren: () => import('${routeLoadChildren}').then( m => m.${ngModuleName})\n  }${trailingCommaFound ? ',' : ''}\n`));
 
         return changes;
       }
