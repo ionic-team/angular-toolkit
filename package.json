@@ -32,7 +32,6 @@
   "dependencies": {
     "@schematics/angular": "^8.0.0",
     "tslib": "^1.9.0",
-    "typescript": "3.4.3",
     "ws": "^7.0.1"
   },
   "devDependencies": {
@@ -56,6 +55,7 @@
     "semantic-release": "^15.9.17",
     "tslint": "^5.12.0",
     "tslint-ionic-rules": "0.0.21",
+    "typescript": "~3.5.3",
     "typescript-tslint-plugin": "0.3.1"
   },
   "peerDependencies": {
