@@ -61,13 +61,15 @@ export function prepareBrowserConfig(
         options.consolelogsPort
       } }`
     );
-    if (optionsStarter.scripts) {
-      optionsStarter.scripts.push({
+    if (!optionsStarter.scripts) {
+      optionsStarter.scripts = [];
+    }
+    optionsStarter.scripts.push({
         input: configPath,
         bundleName: 'consolelogs',
         lazy: false,
       });
-      optionsStarter.scripts.push({
+    optionsStarter.scripts.push({
         input: getSystemPath(
           join(
             normalize(__dirname),
@@ -78,7 +80,6 @@ export function prepareBrowserConfig(
         bundleName: 'consolelogs',
         lazy: false,
       });
-    }
   }
 
   if (options.cordovaMock) {
