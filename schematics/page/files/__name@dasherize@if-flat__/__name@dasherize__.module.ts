@@ -1,25 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { <%= classify(name) %>Page } from './<%= dasherize(name) %>.page';
+import { <%= classify(name) %>PageRoutingModule } from './<%= dasherize(name) %>-routing.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: <%= classify(name) %>Page
-  }
-];
+import { <%= classify(name) %>Page } from './<%= dasherize(name) %>.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    <%= classify(name) %>PageRoutingModule
   ],
   declarations: [<%= classify(name) %>Page]
 })
