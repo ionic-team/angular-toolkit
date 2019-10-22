@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/ionic-team/angular-toolkit/compare/v2.1.0...v2.1.1) (2019-10-22)
+
+
+### Bug Fixes
+
+* **build:** handle no scripts in angular ([#182](https://github.com/ionic-team/angular-toolkit/issues/182)) ([388e1ad](https://github.com/ionic-team/angular-toolkit/commit/388e1ad3dec5004ceaa8030acf7a248c121be94c)), closes [#179](https://github.com/ionic-team/angular-toolkit/issues/179)
+
 # [2.1.0](https://github.com/ionic-team/angular-toolkit/compare/v2.0.0...v2.1.0) (2019-10-22)
 
 
