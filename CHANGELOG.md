@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/ionic-team/angular-toolkit/compare/v2.0.0...v2.1.0) (2019-10-22)
+
+
+### Bug Fixes
+
+* **routing:** split out routes into routing module ([#181](https://github.com/ionic-team/angular-toolkit/issues/181)) ([b13b823](https://github.com/ionic-team/angular-toolkit/commit/b13b8233c1b693be7a845494b3d98cda2c8fe1da))
+* **unit-tests:** allow the components to hydrate ([#173](https://github.com/ionic-team/angular-toolkit/issues/173)) ([4159e59](https://github.com/ionic-team/angular-toolkit/commit/4159e598a43bdedaaaa4d179dd7c3fabc2618d42))
+
+
+### Features
+
+* **router:** change to dynamic import ([#176](https://github.com/ionic-team/angular-toolkit/issues/176)) ([fbf3627](https://github.com/ionic-team/angular-toolkit/commit/fbf3627f8a182b48bdacd6ca601d2c9411cf3fda))
+
 # [2.0.0](https://github.com/ionic-team/angular-toolkit/compare/v1.5.1...v2.0.0) (2019-06-25)
 
 
