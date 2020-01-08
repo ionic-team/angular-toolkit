@@ -46,6 +46,12 @@ export function prepareBrowserConfig(
     optionsStarter.deleteOutputPath = false;
   }
 
+  // Initialize an empty script array to make sure assets are pushed even when
+  // scripts is not configured in angular.json
+  if (!optionsStarter.scripts) {
+    optionsStarter.scripts = [];
+  }
+
   if (options.consolelogs) {
     // Write the config to a file, and then include that in the bundle so it loads on window
     const configPath = getSystemPath(
@@ -61,9 +67,6 @@ export function prepareBrowserConfig(
         options.consolelogsPort
       } }`
     );
-    if (!optionsStarter.scripts) {
-      optionsStarter.scripts = [];
-    }
     optionsStarter.scripts.push({
         input: configPath,
         bundleName: 'consolelogs',
