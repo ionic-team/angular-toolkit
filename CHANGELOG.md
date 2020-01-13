@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/ionic-team/angular-toolkit/compare/v2.1.1...v2.1.2) (2020-01-13)
+
+
+### Bug Fixes
+
+* **cordova:** add cordova.js to index.html even without scripts array ([c8bb37b](https://github.com/ionic-team/angular-toolkit/commit/c8bb37bd1f817f762720b0e3a5c89b4d6a7464e0)), closes [#188](https://github.com/ionic-team/angular-toolkit/issues/188)
+
 ## [2.1.1](https://github.com/ionic-team/angular-toolkit/compare/v2.1.0...v2.1.1) (2019-10-22)
 
 
