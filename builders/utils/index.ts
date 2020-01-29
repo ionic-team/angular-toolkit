@@ -136,7 +136,8 @@ export interface FormattedAssets {
   copyWebpackPluginPatterns: any[];
 }
 export function prepareServerConfig(
-  options: CordovaServeBuilderSchema
+  options: CordovaServeBuilderSchema,
+  root: string
 ): FormattedAssets {
   const scripts = [];
   const assets = [];

@@ -34,7 +34,7 @@ export function serveCordova(
   context: BuilderContext
 ): Observable<DevServerBuilderOutput> {
   const { devServerTarget, port, host, ssl } = options;
-
+  const root = context.workspaceRoot;
   const devServerTargetSpec = targetFromTargetString(devServerTarget);
 
   async function setup() {
@@ -44,7 +44,7 @@ export function serveCordova(
     devServerTargetOptions.port = port;
     devServerTargetOptions.host = host;
     devServerTargetOptions.ssl = ssl;
-    const formattedAssets = prepareServerConfig(options);
+    const formattedAssets = prepareServerConfig(options, root);
     if (options.consolelogs && options.consolelogsPort) {
       await createConsoleLogServer(host, options.consolelogsPort);
     }
@@ -63,10 +63,7 @@ export function serveCordova(
 }
 export default createBuilder<CordovaDevServerBuilderOptions, any>(serveCordova);
 
-function getTransforms(
-  formattedAssets: FormattedAssets,
-  context: BuilderContext
-) {
+function getTransforms(formattedAssets: FormattedAssets, context: BuilderContext) {
   return {
     webpackConfiguration: cordovaServeTransform(formattedAssets, context),
     indexHtml: indexHtmlTransformFactory(formattedAssets, context),

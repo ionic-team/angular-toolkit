@@ -31,7 +31,7 @@ export async function createConsoleLogServer(host: string, port: number): Promis
         data = data.toString();
         msg = JSON.parse(data);
       } catch (e) {
-        process.stderr.write(`Error parsing JSON message from client: "${data}" ${terminal.red(e.stack ? e.stack : e)}\n`);
+        process.stderr.write(`Error parsing JSON message from client: "${data}" ${red(e.stack ? e.stack : e)}\n`);
         return;
       }
 
