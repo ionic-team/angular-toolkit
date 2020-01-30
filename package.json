@@ -50,7 +50,7 @@
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.1.0",
     "husky": "^4.0.10",
-    "lint-staged": "^9.1.0",
+    "lint-staged": "^10.0.4",
     "rimraf": "^2.6.2",
     "semantic-release": "^15.9.17",
     "tslint": "^5.12.0",
