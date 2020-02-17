@@ -1,5 +1,8 @@
+import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/utils';
+import { AssetPatternClass } from '@angular-devkit/build-angular/src/browser/schema';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { writeFileSync } from 'fs';
+import { resolve } from 'path';
 
 import { CordovaBuildBuilderSchema } from '../cordova-build/schema';
 import { CordovaServeBuilderSchema } from '../cordova-serve/schema';
@@ -68,21 +71,17 @@ export function prepareBrowserConfig(
       } }`
     );
     optionsStarter.scripts.push({
-        input: configPath,
-        bundleName: 'consolelogs',
-        lazy: false,
-      });
+      input: configPath,
+      bundleName: 'consolelogs',
+      lazy: false,
+    });
     optionsStarter.scripts.push({
-        input: getSystemPath(
-          join(
-            normalize(__dirname),
-            '../../assets',
-            normalize('consolelogs.js')
-          )
-        ),
-        bundleName: 'consolelogs',
-        lazy: false,
-      });
+      input: getSystemPath(
+        join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))
+      ),
+      bundleName: 'consolelogs',
+      lazy: false,
+    });
   }
 
   if (options.cordovaMock) {
@@ -124,4 +123,120 @@ export function prepareBrowserConfig(
   }
 
   return optionsStarter;
+}
+
+export interface GlobalScriptsByBundleName {
+  bundleName: string;
+  paths: string[];
+  inject: boolean;
+}
+export interface FormattedAssets {
+  globalScriptsByBundleName: GlobalScriptsByBundleName[];
+
+  copyWebpackPluginPatterns: any[];
+}
+export function prepareServerConfig(
+  options: CordovaServeBuilderSchema,
+  root: string
+): FormattedAssets {
+  const scripts = [];
+  const assets = [];
+  const cordovaBasePath = normalize(
+    options.cordovaBasePath ? options.cordovaBasePath : '.'
+  );
+  if (options.consolelogs) {
+    // Write the config to a file, and then include that in the bundle so it loads on window
+    const configPath = getSystemPath(
+      join(
+        normalize(__dirname),
+        '../../assets',
+        normalize('consolelog-config.js')
+      )
+    );
+    writeFileSync(
+      configPath,
+      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${
+        options.consolelogsPort
+      } }`
+    );
+    scripts.push({ input: configPath, bundleName: 'consolelogs', lazy: false });
+    scripts.push({
+      input: getSystemPath(
+        join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))
+      ),
+      bundleName: 'consolelogs',
+      lazy: false,
+    });
+  }
+  if (options.cordovaMock) {
+    scripts.push({
+      input: getSystemPath(
+        join(normalize(__dirname), '../../assets', normalize('cordova.js'))
+      ),
+      bundleName: 'cordova',
+      lazy: false,
+    });
+  } else if (options.cordovaAssets) {
+    const platformWWWPath = join(
+      cordovaBasePath,
+      normalize(`platforms/${options.platform}/platform_www`)
+    );
+    assets.push({
+      glob: '**/*',
+      input: getSystemPath(platformWWWPath),
+      output: './',
+    });
+    scripts.push({
+      input: getSystemPath(join(platformWWWPath, normalize('cordova.js'))),
+      bundleName: 'cordova',
+      lazy: false,
+    });
+  }
+
+  const globalScriptsByBundleName = normalizeExtraEntryPoints(
+    scripts,
+    'scripts'
+  ).reduce(
+    (
+      prev: { bundleName: string; paths: string[]; inject: boolean }[],
+      curr
+    ) => {
+      const { bundleName, inject, input } = curr;
+      const resolvedPath = resolve(root, input);
+      const existingEntry = prev.find(el => el.bundleName === bundleName);
+      if (existingEntry) {
+        existingEntry.paths.push(resolvedPath);
+      } else {
+        prev.push({
+          bundleName,
+          inject,
+          paths: [resolvedPath],
+        });
+      }
+      return prev;
+    },
+    []
+  );
+
+  const copyWebpackPluginPatterns = assets.map((asset: AssetPatternClass) => {
+    // Resolve input paths relative to workspace root and add slash at the end.
+    asset.input = resolve(root, asset.input).replace(/\\/g, '/');
+    asset.input = asset.input.endsWith('/') ? asset.input : asset.input + '/';
+    asset.output = asset.output.endsWith('/')
+      ? asset.output
+      : asset.output + '/';
+
+    return {
+      context: asset.input,
+      // Now we remove starting slash to make Webpack place it from the output root.
+      to: asset.output.replace(/^\//, ''),
+      ignore: asset.ignore,
+      from: {
+        glob: asset.glob,
+        dot: true,
+      },
+    };
+  });
+
+  return { globalScriptsByBundleName, copyWebpackPluginPatterns };
 }

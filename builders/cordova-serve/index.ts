@@ -1,42 +1,121 @@
-import { BuilderContext, BuilderOutput, createBuilder, targetFromTargetString } from '@angular-devkit/architect';
+import {
+  BuilderContext,
+  createBuilder,
+  targetFromTargetString
+} from '@angular-devkit/architect';
+import {
+  ExecutionTransformer,
+  executeDevServerBuilder
+} from '@angular-devkit/build-angular';
+import { ScriptsWebpackPlugin } from '@angular-devkit/build-angular/src/angular-cli-files/plugins/scripts-webpack-plugin';
+import { IndexHtmlTransform } from '@angular-devkit/build-angular/src/angular-cli-files/utilities/index-file/write-index-html';
+import {
+  DevServerBuilderOptions,
+  DevServerBuilderOutput
+} from '@angular-devkit/build-angular/src/dev-server';
 import { json } from '@angular-devkit/core';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import { basename } from 'path';
+import { Observable, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Configuration } from 'webpack';
 
-import { prepareBrowserConfig } from '../utils';
+import { FormattedAssets, prepareServerConfig } from '../utils';
+import { augmentIndexHtml } from '../utils/append-scripts';
 
 import { createConsoleLogServer } from './log-server';
 import { CordovaServeBuilderSchema } from './schema';
 
-export type CordovaDevServerBuilderOptions = CordovaServeBuilderSchema & json.JsonObject;
+export type CordovaDevServerBuilderOptions = CordovaServeBuilderSchema &
+  json.JsonObject;
 
-export async function serveCordova(
+export function serveCordova(
   options: CordovaServeBuilderSchema,
   context: BuilderContext
-): Promise<BuilderOutput> {
-  return new Promise(async () => {
-    context.reportStatus(`running cordova serve...`);
-    const { devServerTarget, cordovaBuildTarget, port, host, ssl } = options;
+): Observable<DevServerBuilderOutput> {
+  const { devServerTarget, port, host, ssl } = options;
+  const root = context.workspaceRoot;
+  const devServerTargetSpec = targetFromTargetString(devServerTarget);
 
-    // Getting the original browser build options
-    const cordovaBuildTargetSpec = targetFromTargetString(cordovaBuildTarget);
-    const cordovaBuildTargetOptions = await context.getTargetOptions(cordovaBuildTargetSpec) as { browserTarget: string };
-    const browserBuildTargetSpec = targetFromTargetString(cordovaBuildTargetOptions.browserTarget);
+  async function setup() {
+    const devServerTargetOptions = (await context.getTargetOptions(devServerTargetSpec)) as DevServerBuilderOptions;
+    const devServerName = await context.getBuilderNameForTarget(devServerTargetSpec);
 
-    // What we actually need....
-    const browserBuildTargetOptions = await context.getTargetOptions(browserBuildTargetSpec);
-
-    // Modifying those options to pass in cordova-speicfic stuff
-    prepareBrowserConfig(options, browserBuildTargetOptions);
-
+    devServerTargetOptions.port = port;
+    devServerTargetOptions.host = host;
+    devServerTargetOptions.ssl = ssl;
+    // tslint:disable-next-line: no-unnecessary-type-assertion
+    const formattedOptions = await context.validateOptions(devServerTargetOptions, devServerName) as DevServerBuilderOptions;
+    const formattedAssets = prepareServerConfig(options, root);
     if (options.consolelogs && options.consolelogsPort) {
       await createConsoleLogServer(host, options.consolelogsPort);
     }
+    return { formattedOptions, formattedAssets };
+  }
 
-    const devServerTargetSpec = targetFromTargetString(devServerTarget);
-    const devServerTargetOptions = await context.getTargetOptions(devServerTargetSpec);
-
-    return context
-      .scheduleTarget(devServerTargetSpec, { host, port, ssl }, devServerTargetOptions)
-      .then(buildEvent => ({ ...buildEvent }));
-  });
+  return from(setup()).pipe(
+    switchMap(({ formattedOptions, formattedAssets }) =>
+      executeDevServerBuilder(
+        formattedOptions,
+        context,
+        getTransforms(formattedAssets, context)
+      )
+    )
+  );
 }
 export default createBuilder<CordovaDevServerBuilderOptions, any>(serveCordova);
+
+function getTransforms(formattedAssets: FormattedAssets, context: BuilderContext) {
+  return {
+    webpackConfiguration: cordovaServeTransform(formattedAssets, context),
+    indexHtml: indexHtmlTransformFactory(formattedAssets, context),
+  };
+}
+
+const cordovaServeTransform: (
+  formattedAssets: FormattedAssets,
+  context: BuilderContext
+) => ExecutionTransformer<Configuration> = (
+  formattedAssets,
+  { workspaceRoot }
+) => browserWebpackConfig => {
+  const scriptExtras = formattedAssets.globalScriptsByBundleName.map(
+    (script: { bundleName: any; paths: any }) => {
+      const bundleName = script.bundleName;
+      return new ScriptsWebpackPlugin({
+        name: bundleName,
+        sourceMap: true,
+        filename: `${basename(bundleName)}.js`,
+        scripts: script.paths,
+        basePath: workspaceRoot,
+      });
+    }
+  );
+
+  const copyWebpackPluginOptions = {
+    ignore: ['.gitkeep', '**/.DS_Store', '**/Thumbs.db'],
+  };
+  const copyWebpackPluginInstance = new CopyWebpackPlugin(
+    formattedAssets.copyWebpackPluginPatterns,
+    copyWebpackPluginOptions
+  );
+  // tslint:disable-next-line: no-non-null-assertion
+  browserWebpackConfig.plugins!.push(
+    ...scriptExtras,
+    copyWebpackPluginInstance
+  );
+  return browserWebpackConfig;
+};
+
+export const indexHtmlTransformFactory: (
+  formattedAssets: FormattedAssets,
+  context: BuilderContext
+) => IndexHtmlTransform = ({ globalScriptsByBundleName }) => (
+  indexTransform: string
+) => {
+  const augmentedHtml = augmentIndexHtml(
+    indexTransform,
+    globalScriptsByBundleName
+  );
+  return Promise.resolve(augmentedHtml);
+};

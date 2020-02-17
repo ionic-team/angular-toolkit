@@ -1,4 +1,4 @@
-import { terminal } from '@angular-devkit/core';
+import { red, reset, yellow } from 'colorette';
 import * as util from 'util';
 import * as WebSocket from 'ws';
 
@@ -31,7 +31,7 @@ export async function createConsoleLogServer(host: string, port: number): Promis
         data = data.toString();
         msg = JSON.parse(data);
       } catch (e) {
-        process.stderr.write(`Error parsing JSON message from client: "${data}" ${terminal.red(e.stack ? e.stack : e)}\n`);
+        process.stderr.write(`Error parsing JSON message from client: "${data}" ${red(e.stack ? e.stack : e)}\n`);
         return;
       }
 
@@ -45,11 +45,11 @@ export async function createConsoleLogServer(host: string, port: number): Promis
         let status: ((_: string) => string) | undefined;
 
         if (msg.type === 'info' || msg.type === 'log') {
-          status = terminal.reset;
+          status = reset;
         } else if (msg.type === 'error') {
-          status = terminal.red;
+          status = red;
         } else if (msg.type === 'warn') {
-          status = terminal.yellow;
+          status = yellow;
         }
 
         // pretty print objects and arrays (no newlines for arrays)
