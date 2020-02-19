@@ -1,7 +1,5 @@
 import { strings } from '@angular-devkit/core';
 import { Rule, SchematicsException, Tree, apply, branchAndMerge, chain, filter, mergeWith, move, noop, template, url } from '@angular-devkit/schematics';
-import { addDeclarationToModule, addEntryComponentToModule, addExportToModule, addSymbolToNgModuleMetadata } from '@schematics/angular/utility/ast-utils';
-import { InsertChange } from '@schematics/angular/utility/change';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { buildDefaultPath, getProject } from '@schematics/angular/utility/project';
@@ -9,6 +7,8 @@ import { validateHtmlSelector, validateName } from '@schematics/angular/utility/
 import * as ts from 'typescript';
 
 import { buildSelector } from '../util';
+import { addDeclarationToModule, addEntryComponentToModule, addExportToModule, addSymbolToNgModuleMetadata } from '../util/ast-util';
+import { InsertChange } from '../util/change';
 
 import { Schema as ComponentOptions } from './schema';
 
