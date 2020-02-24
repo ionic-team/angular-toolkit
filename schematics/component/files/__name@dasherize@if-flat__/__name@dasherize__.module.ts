@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { <%= classify(name) %>Component } from './<%= dasherize(name) %>.component';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule,IonicModule,],
+  imports: [ CommonModule, FormsModule, IonicModule,],
   declarations: [<%= classify(name) %>Component],
   exports: [<%= classify(name) %>Component]
 })
