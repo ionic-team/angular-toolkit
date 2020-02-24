@@ -48,7 +48,7 @@
     "@semantic-release/npm": "^5.0.4",
     "@types/cheerio": "0.22.15",
     "@types/copy-webpack-plugin": "5.0.0",
-    "@types/karma": "3.0.5",
+    "@types/karma": "3.0.7",
     "@types/node": "^8.10.34",
     "@types/webpack": "^4.4.14",
     "@types/webpack-dev-server": "^3.1.1",
