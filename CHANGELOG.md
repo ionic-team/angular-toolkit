@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/ionic-team/angular-toolkit/compare/v2.1.2...v2.2.0) (2020-02-24)
+
+
+### Features
+
+* **deps:** bump deps to support angular 9 ([5b80c04](https://github.com/ionic-team/angular-toolkit/commit/5b80c04de6c00b06339c183bbd30efeff5f51dc3))
+
 ## [2.1.2](https://github.com/ionic-team/angular-toolkit/compare/v2.1.1...v2.1.2) (2020-01-13)
 
 
