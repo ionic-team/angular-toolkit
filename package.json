@@ -30,7 +30,7 @@
     "ionicframework"
   ],
   "dependencies": {
-    "@schematics/angular": "^8.0.0",
+    "@schematics/angular": "^9.0.3",
     "cheerio": "1.0.0-rc.3",
     "colorette": "1.1.0",
     "copy-webpack-plugin": "5.1.1",
