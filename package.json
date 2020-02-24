@@ -46,7 +46,7 @@
     "@semantic-release/git": "^7.0.4",
     "@semantic-release/github": "^5.0.6",
     "@semantic-release/npm": "^5.0.4",
-    "@types/cheerio": "0.22.15",
+    "@types/cheerio": "0.22.16",
     "@types/copy-webpack-plugin": "5.0.0",
     "@types/karma": "3.0.5",
     "@types/node": "^8.10.34",
