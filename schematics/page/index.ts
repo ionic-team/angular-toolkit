@@ -163,6 +163,7 @@ export default function(options: PageOptions): Rule {
 
     const templateSource = apply(url('./files'), [
       options.spec ? noop() : filter(p => !p.endsWith('.spec.ts')),
+      options.createModule ? noop() : filter(p => !p.endsWith('.module.ts')),
       template({
         ...strings,
         'if-flat': (s: string) => options.flat ? '' : s,
@@ -173,7 +174,7 @@ export default function(options: PageOptions): Rule {
 
     return chain([
       branchAndMerge(chain([
-        addRouteToNgModule(options),
+        options.createModule ? addRouteToNgModule(options) : noop(),
         mergeWith(templateSource),
       ])),
     ])(host, context);

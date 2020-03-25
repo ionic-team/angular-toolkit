@@ -59,6 +59,11 @@
       "format": "html-selector",
       "description": "The selector to use for the page"
     },
+    "createModule":  {
+      "type": "boolean",
+      "description": "Allows creating an NgModule for the page",
+      "default": true
+    },
     "module":  {
       "type": "string",
       "description": "Allows specification of the declaring module",
