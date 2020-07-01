@@ -1,9 +1,10 @@
 import { strings } from '@angular-devkit/core';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { Rule, SchematicsException, Tree, apply, branchAndMerge, chain, filter, mergeWith, move, noop, template, url } from '@angular-devkit/schematics';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
-import { buildDefaultPath, getProject } from '@schematics/angular/utility/project';
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
+import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 
 import { buildSelector } from '../util';
@@ -123,21 +124,22 @@ function addImportToImports(host: Tree, options: ComponentOptions): void {
 }
 
 export default function(options: ComponentOptions): Rule {
-  return (host, context) => {
+  return async (host: Tree) => {
     if (!options.project) {
       throw new SchematicsException('Option (project) is required.');
     }
 
-    const project = getProject(host, options.project);
+    const workspace = await getWorkspace(host);
+    const project = workspace.projects.get(options.project);
 
     if (options.path === undefined) {
-      options.path = buildDefaultPath(project);
+      options.path = buildDefaultPath(project as ProjectDefinition);
     }
 
     const parsedPath = parseName(options.path, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
-    options.selector = options.selector ? options.selector : buildSelector(options, project.prefix);
+    options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');
 
     validateName(options.name);
     validateHtmlSelector(options.selector);
@@ -158,6 +160,6 @@ export default function(options: ComponentOptions): Rule {
         addImportToNgModule(options),
         mergeWith(templateSource),
       ])),
-    ])(host, context);
+    ]);
   };
 }
