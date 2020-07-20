@@ -32,7 +32,7 @@
   "dependencies": {
     "@schematics/angular": ">=8.0.0",
     "cheerio": "1.0.0-rc.3",
-    "colorette": "1.1.0",
+    "colorette": "1.2.1",
     "copy-webpack-plugin": "5.1.1",
     "tslib": "^1.9.0",
     "ws": "^7.0.1"
