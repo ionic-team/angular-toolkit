@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/ionic-team/angular-toolkit/compare/v2.2.0...v2.3.0) (2020-07-20)
+
+
+### Features
+
+* update schematics to support ng10 ([#251](https://github.com/ionic-team/angular-toolkit/issues/251)) ([7c9a245](https://github.com/ionic-team/angular-toolkit/commit/7c9a24560088163547369ad67f6d3d98e752bdca))
+
 # [2.2.0](https://github.com/ionic-team/angular-toolkit/compare/v2.1.2...v2.2.0) (2020-02-24)
 
 
