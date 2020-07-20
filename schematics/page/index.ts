@@ -1,9 +1,10 @@
 import { Path, join, normalize, strings } from '@angular-devkit/core';
+import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { DirEntry, Rule, SchematicsException, Tree, apply, branchAndMerge, chain, filter, mergeWith, move, noop, template, url } from '@angular-devkit/schematics';
 import { ModuleOptions, buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
-import { buildDefaultPath, getProject } from '@schematics/angular/utility/project';
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
+import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 
 import { buildSelector } from '../util';
@@ -12,19 +13,22 @@ import { Change, InsertChange } from '../util/change';
 
 import { Schema as PageOptions } from './schema';
 
-function findRoutingModuleFromOptions(host: Tree, options: ModuleOptions): Path | undefined {
+function findRoutingModuleFromOptions(
+  host: Tree,
+  options: ModuleOptions
+): Path | undefined {
   if (options.hasOwnProperty('skipImport') && options.skipImport) {
     return undefined;
   }
 
   if (!options.module) {
-    const pathToCheck = (options.path || '')
-                      + (options.flat ? '' : '/' + strings.dasherize(options.name));
+    const pathToCheck =
+      (options.path || '') +
+      (options.flat ? '' : '/' + strings.dasherize(options.name));
 
     return normalize(findRoutingModule(host, pathToCheck));
   } else {
-    const modulePath = normalize(
-      '/' + (options.path) + '/' + options.module);
+    const modulePath = normalize('/' + options.path + '/' + options.module);
     const moduleBaseName = normalize(modulePath).split('/').pop();
 
     if (host.exists(modulePath)) {
@@ -52,15 +56,19 @@ function findRoutingModule(host: Tree, generateDir: string): Path {
     if (matches.length === 1) {
       return join(dir.path, matches[0]);
     } else if (matches.length > 1) {
-      throw new Error('More than one module matches. Use skip-import option to skip importing '
-        + 'the component into the closest module.');
+      throw new Error(
+        'More than one module matches. Use skip-import option to skip importing ' +
+          'the component into the closest module.'
+      );
     }
 
     dir = dir.parent;
   }
 
-  throw new Error('Could not find an NgModule. Use the skip-import '
-    + 'option to skip importing in NgModule.');
+  throw new Error(
+    'Could not find an NgModule. Use the skip-import ' +
+      'option to skip importing in NgModule.'
+  );
 }
 
 function addRouteToNgModule(options: PageOptions): Rule {
@@ -78,19 +86,31 @@ function addRouteToNgModule(options: PageOptions): Rule {
     }
 
     const sourceText = text.toString('utf8');
-    const source = ts.createSourceFile(module, sourceText, ts.ScriptTarget.Latest, true);
+    const source = ts.createSourceFile(
+      module,
+      sourceText,
+      ts.ScriptTarget.Latest,
+      true
+    );
 
-    const pagePath = (
+    const pagePath =
       `/${options.path}/` +
       (options.flat ? '' : `${strings.dasherize(options.name)}/`) +
-      `${strings.dasherize(options.name)}.module`
-    );
+      `${strings.dasherize(options.name)}.module`;
 
     const relativePath = buildRelativePath(module, pagePath);
 
-    const routePath = strings.dasherize(options.routePath ? options.routePath : options.name);
+    const routePath = strings.dasherize(
+      options.routePath ? options.routePath : options.name
+    );
     const ngModuleName = `${strings.classify(options.name)}PageModule`;
-    const changes = addRouteToRoutesArray(source, module, routePath, relativePath, ngModuleName);
+    const changes = addRouteToRoutesArray(
+      source,
+      module,
+      routePath,
+      relativePath,
+      ngModuleName
+    );
     const recorder = host.beginUpdate(module);
 
     for (const change of changes) {
@@ -105,14 +125,24 @@ function addRouteToNgModule(options: PageOptions): Rule {
   };
 }
 
-function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, routePath: string, routeLoadChildren: string, ngModuleName: string): Change[] {
+function addRouteToRoutesArray(
+  source: ts.SourceFile,
+  ngModulePath: string,
+  routePath: string,
+  routeLoadChildren: string,
+  ngModuleName: string
+): Change[] {
   const keywords = findNodes(source, ts.SyntaxKind.VariableStatement);
 
   for (const keyword of keywords) {
     if (ts.isVariableStatement(keyword)) {
-      const [ declaration ] = keyword.declarationList.declarations;
+      const [declaration] = keyword.declarationList.declarations;
 
-      if (ts.isVariableDeclaration(declaration) && declaration.initializer && declaration.name.getText() === 'routes') {
+      if (
+        ts.isVariableDeclaration(declaration) &&
+        declaration.initializer &&
+        declaration.name.getText() === 'routes'
+      ) {
         const node = declaration.initializer.getChildAt(1);
         const lastRouteNode = node.getLastToken();
 
@@ -126,10 +156,20 @@ function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, rout
         if (lastRouteNode.kind === ts.SyntaxKind.CommaToken) {
           trailingCommaFound = true;
         } else {
-          changes.push(new InsertChange(ngModulePath, lastRouteNode.getEnd(), ','));
+          changes.push(
+            new InsertChange(ngModulePath, lastRouteNode.getEnd(), ',')
+          );
         }
 
-        changes.push(new InsertChange(ngModulePath, lastRouteNode.getEnd() + 1, `  {\n    path: '${routePath}',\n    loadChildren: () => import('${routeLoadChildren}').then( m => m.${ngModuleName})\n  }${trailingCommaFound ? ',' : ''}\n`));
+        changes.push(
+          new InsertChange(
+            ngModulePath,
+            lastRouteNode.getEnd() + 1,
+            `  {\n    path: '${routePath}',\n    loadChildren: () => import('${routeLoadChildren}').then( m => m.${ngModuleName})\n  }${
+              trailingCommaFound ? ',' : ''
+            }\n`
+          )
+        );
 
         return changes;
       }
@@ -140,15 +180,16 @@ function addRouteToRoutesArray(source: ts.SourceFile, ngModulePath: string, rout
 }
 
 export default function(options: PageOptions): Rule {
-  return (host, context) => {
+  return async (host: Tree) => {
     if (!options.project) {
       throw new SchematicsException('Option (project) is required.');
     }
 
-    const project = getProject(host, options.project);
+    const workspace = await getWorkspace(host);
+    const project = workspace.projects.get(options.project);
 
     if (options.path === undefined) {
-      options.path = buildDefaultPath(project);
+      options.path = buildDefaultPath(project as ProjectDefinition);
     }
 
     options.module = findRoutingModuleFromOptions(host, options);
@@ -156,7 +197,7 @@ export default function(options: PageOptions): Rule {
     const parsedPath = parseName(options.path, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
-    options.selector = options.selector ? options.selector : buildSelector(options, project.prefix);
+    options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');
 
     validateName(options.name);
     validateHtmlSelector(options.selector);
@@ -165,17 +206,16 @@ export default function(options: PageOptions): Rule {
       options.spec ? noop() : filter(p => !p.endsWith('.spec.ts')),
       template({
         ...strings,
-        'if-flat': (s: string) => options.flat ? '' : s,
+        'if-flat': (s: string) => (options.flat ? '' : s),
         ...options,
       }),
       move(parsedPath.path),
     ]);
 
     return chain([
-      branchAndMerge(chain([
-        addRouteToNgModule(options),
-        mergeWith(templateSource),
-      ])),
-    ])(host, context);
+      branchAndMerge(
+        chain([addRouteToNgModule(options), mergeWith(templateSource)])
+      ),
+    ]);
   };
 }
