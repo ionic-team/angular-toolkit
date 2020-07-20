@@ -42,7 +42,7 @@
     "@angular-devkit/build-angular": ">=0.803.0",
     "@angular-devkit/core": ">=8.0.0",
     "@angular-devkit/schematics": ">=8.0.0",
-    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^7.0.4",
     "@semantic-release/github": "^5.0.6",
     "@semantic-release/npm": "^5.0.4",
