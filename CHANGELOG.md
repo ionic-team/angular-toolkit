@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/ionic-team/angular-toolkit/compare/v2.3.0...v2.3.1) (2020-08-19)
+
+
+### Bug Fixes
+
+* **deps:** update deps for security vulnerabilities ([#263](https://github.com/ionic-team/angular-toolkit/issues/263)) ([f0e514d](https://github.com/ionic-team/angular-toolkit/commit/f0e514d6140d929e521ff4f77844642424cfe7cb)), closes [#261](https://github.com/ionic-team/angular-toolkit/issues/261)
+
 # [2.3.0](https://github.com/ionic-team/angular-toolkit/compare/v2.2.0...v2.3.0) (2020-07-20)
 
 
