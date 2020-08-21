@@ -1,5 +1,4 @@
 import { strings } from '@angular-devkit/core';
-import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { Rule, SchematicsException, Tree, apply, branchAndMerge, chain, filter, mergeWith, move, noop, template, url } from '@angular-devkit/schematics';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
@@ -132,11 +131,12 @@ export default function(options: ComponentOptions): Rule {
     const workspace = await getWorkspace(host);
     const project = workspace.projects.get(options.project);
 
-    if (options.path === undefined) {
-      options.path = buildDefaultPath(project as ProjectDefinition);
+    let optPath = '';
+    if (project && options.path === undefined) {
+      optPath = buildDefaultPath(project);
     }
 
-    const parsedPath = parseName(options.path, options.name);
+    const parsedPath = parseName(optPath, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
     options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');

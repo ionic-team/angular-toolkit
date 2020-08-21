@@ -92,13 +92,10 @@ const cordovaServeTransform: (
     }
   );
 
-  const copyWebpackPluginOptions = {
-    ignore: ['.gitkeep', '**/.DS_Store', '**/Thumbs.db'],
-  };
-  const copyWebpackPluginInstance = new CopyWebpackPlugin(
-    formattedAssets.copyWebpackPluginPatterns,
-    copyWebpackPluginOptions
-  );
+  const copyWebpackPluginInstance = new CopyWebpackPlugin({
+      patterns: formattedAssets.copyWebpackPluginPatterns,
+  });
+
   // tslint:disable-next-line: no-non-null-assertion
   browserWebpackConfig.plugins!.push(
     ...scriptExtras,

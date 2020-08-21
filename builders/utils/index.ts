@@ -2,7 +2,7 @@ import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/ang
 import { AssetPatternClass } from '@angular-devkit/build-angular/src/browser/schema';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { writeFileSync } from 'fs';
-import { resolve } from 'path';
+import { posix, resolve } from 'path';
 
 import { CordovaBuildBuilderSchema } from '../cordova-build/schema';
 import { CordovaServeBuilderSchema } from '../cordova-serve/schema';
@@ -66,9 +66,7 @@ export function prepareBrowserConfig(
     );
     writeFileSync(
       configPath,
-      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${
-        options.consolelogsPort
-      } }`
+      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`
     );
     optionsStarter.scripts.push({
       input: configPath,
@@ -155,9 +153,7 @@ export function prepareServerConfig(
     );
     writeFileSync(
       configPath,
-      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${
-        options.consolelogsPort
-      } }`
+      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`
     );
     scripts.push({ input: configPath, bundleName: 'consolelogs', lazy: false });
     scripts.push({
@@ -220,20 +216,29 @@ export function prepareServerConfig(
 
   const copyWebpackPluginPatterns = assets.map((asset: AssetPatternClass) => {
     // Resolve input paths relative to workspace root and add slash at the end.
-    asset.input = resolve(root, asset.input).replace(/\\/g, '/');
-    asset.input = asset.input.endsWith('/') ? asset.input : asset.input + '/';
-    asset.output = asset.output.endsWith('/')
-      ? asset.output
-      : asset.output + '/';
+    // tslint:disable-next-line: prefer-const
+    let { input, output, ignore = [], glob } = asset;
+    input = resolve(root, input).replace(/\\/g, '/');
+    input = input.endsWith('/') ? input : input + '/';
+    output = output.endsWith('/') ? output : output + '/';
 
     return {
-      context: asset.input,
+      context: input,
       // Now we remove starting slash to make Webpack place it from the output root.
-      to: asset.output.replace(/^\//, ''),
-      ignore: asset.ignore,
-      from: {
-        glob: asset.glob,
+      to: output.replace(/^\//, ''),
+      from: glob,
+      noErrorOnMissing: true,
+      globOptions: {
         dot: true,
+        ignore: [
+          '.gitkeep',
+          '**/.DS_Store',
+          '**/Thumbs.db',
+          // Negate patterns needs to be absolute because copy-webpack-plugin uses absolute globs which
+          // causes negate patterns not to match.
+          // See: https://github.com/webpack-contrib/copy-webpack-plugin/issues/498#issuecomment-639327909
+          ...ignore,
+        ].map(i => posix.join(input, i)),
       },
     };
   });
