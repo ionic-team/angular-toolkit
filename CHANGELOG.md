@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/ionic-team/angular-toolkit/compare/v2.3.1...v2.3.2) (2020-08-21)
+
+
+### Bug Fixes
+
+* **cordovaserve:** update copy-webpack to new format ([#272](https://github.com/ionic-team/angular-toolkit/issues/272)) ([c1e66b5](https://github.com/ionic-team/angular-toolkit/commit/c1e66b554a80665eed77ad3adfd1117b49bc73ab)), closes [#265](https://github.com/ionic-team/angular-toolkit/issues/265)
+
 ## [2.3.1](https://github.com/ionic-team/angular-toolkit/compare/v2.3.0...v2.3.1) (2020-08-19)
 
 
