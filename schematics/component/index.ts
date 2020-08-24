@@ -130,13 +130,11 @@ export default function(options: ComponentOptions): Rule {
 
     const workspace = await getWorkspace(host);
     const project = workspace.projects.get(options.project);
-
-    let optPath = '';
     if (project && options.path === undefined) {
-      optPath = buildDefaultPath(project);
+      options.path = buildDefaultPath(project);
     }
 
-    const parsedPath = parseName(optPath, options.name);
+    const parsedPath = parseName(options.path as string, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
     options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');
