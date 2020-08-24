@@ -186,14 +186,13 @@ export default function(options: PageOptions): Rule {
 
     const workspace = await getWorkspace(host);
     const project = workspace.projects.get(options.project);
-    let optPath = '';
     if (project && options.path === undefined) {
-      optPath = buildDefaultPath(project);
+      options.path = buildDefaultPath(project);
     }
 
     options.module = findRoutingModuleFromOptions(host, options);
 
-    const parsedPath = parseName(optPath, options.name);
+    const parsedPath = parseName(options.path as string, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
     options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');
