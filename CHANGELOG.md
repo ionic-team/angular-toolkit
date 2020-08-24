@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/ionic-team/angular-toolkit/compare/v2.3.2...v2.3.3) (2020-08-24)
+
+
+### Bug Fixes
+
+* **generators:** update path builder ([#275](https://github.com/ionic-team/angular-toolkit/issues/275)) ([1393e8c](https://github.com/ionic-team/angular-toolkit/commit/1393e8c088c93d2a505d1ac96c68f03e32a815ac)), closes [#274](https://github.com/ionic-team/angular-toolkit/issues/274)
+
 ## [2.3.2](https://github.com/ionic-team/angular-toolkit/compare/v2.3.1...v2.3.2) (2020-08-21)
 
 
