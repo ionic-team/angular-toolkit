@@ -1,5 +1,5 @@
-import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/utils';
 import { AssetPatternClass } from '@angular-devkit/build-angular/src/browser/schema';
+import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/webpack/utils/helpers';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { writeFileSync } from 'fs';
 import { posix, resolve } from 'path';
