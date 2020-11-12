@@ -1,5 +1,5 @@
-import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/utils';
 import { AssetPatternClass } from '@angular-devkit/build-angular/src/browser/schema';
+import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/webpack/utils/helpers';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { writeFileSync } from 'fs';
 import { posix, resolve } from 'path';
@@ -71,14 +71,12 @@ export function prepareBrowserConfig(
     optionsStarter.scripts.push({
       input: configPath,
       bundleName: 'consolelogs',
-      lazy: false,
     });
     optionsStarter.scripts.push({
       input: getSystemPath(
         join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))
       ),
       bundleName: 'consolelogs',
-      lazy: false,
     });
   }
 
@@ -89,7 +87,6 @@ export function prepareBrowserConfig(
           join(normalize(__dirname), '../../assets', normalize('cordova.js'))
         ),
         bundleName: 'cordova',
-        lazy: false,
       });
     }
   } else if (options.cordovaAssets) {
@@ -115,7 +112,6 @@ export function prepareBrowserConfig(
       optionsStarter.scripts.push({
         input: getSystemPath(join(platformWWWPath, normalize('cordova.js'))),
         bundleName: 'cordova',
-        lazy: false,
       });
     }
   }
@@ -155,13 +151,12 @@ export function prepareServerConfig(
       configPath,
       `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`
     );
-    scripts.push({ input: configPath, bundleName: 'consolelogs', lazy: false });
+    scripts.push({ input: configPath, bundleName: 'consolelogs' });
     scripts.push({
       input: getSystemPath(
         join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))
       ),
       bundleName: 'consolelogs',
-      lazy: false,
     });
   }
   if (options.cordovaMock) {
@@ -170,7 +165,6 @@ export function prepareServerConfig(
         join(normalize(__dirname), '../../assets', normalize('cordova.js'))
       ),
       bundleName: 'cordova',
-      lazy: false,
     });
   } else if (options.cordovaAssets) {
     const platformWWWPath = join(
@@ -185,7 +179,6 @@ export function prepareServerConfig(
     scripts.push({
       input: getSystemPath(join(platformWWWPath, normalize('cordova.js'))),
       bundleName: 'cordova',
-      lazy: false,
     });
   }
 

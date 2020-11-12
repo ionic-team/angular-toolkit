@@ -7,12 +7,12 @@ import {
   ExecutionTransformer,
   executeDevServerBuilder
 } from '@angular-devkit/build-angular';
-import { ScriptsWebpackPlugin } from '@angular-devkit/build-angular/src/angular-cli-files/plugins/scripts-webpack-plugin';
-import { IndexHtmlTransform } from '@angular-devkit/build-angular/src/angular-cli-files/utilities/index-file/write-index-html';
 import {
   DevServerBuilderOptions,
   DevServerBuilderOutput
 } from '@angular-devkit/build-angular/src/dev-server';
+import { IndexHtmlTransform } from '@angular-devkit/build-angular/src/utils/index-file/write-index-html';
+import { ScriptsWebpackPlugin } from '@angular-devkit/build-angular/src/webpack/plugins';
 import { json } from '@angular-devkit/core';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import { basename } from 'path';
