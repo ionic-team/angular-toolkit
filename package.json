@@ -33,7 +33,7 @@
     "@schematics/angular": "^11.0.0",
     "cheerio": "1.0.0-rc.3",
     "colorette": "1.1.0",
-    "copy-webpack-plugin": "^6.0.3",
+    "copy-webpack-plugin": "^6.2.1",
     "tapable": "^2.1.1",
     "tslib": "^2.0.3",
     "ws": "^7.0.1"
@@ -71,10 +71,10 @@
     "typescript-tslint-plugin": "0.5.5"
   },
   "peerDependencies": {
-    "@angular-devkit/architect": ">=0.800.0",
-    "@angular-devkit/build-angular": ">=0.800.0",
-    "@angular-devkit/core": ">=8.0.0",
-    "@angular-devkit/schematics": ">=8.0.0"
+    "@angular-devkit/architect": "^0.1100.0",
+    "@angular-devkit/build-angular": "^0.1100.0",
+    "@angular-devkit/core": "^11.0.0",
+    "@angular-devkit/schematics": "^11.0.0"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
