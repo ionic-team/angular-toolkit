@@ -1,3 +1,17 @@
+# [3.0.0](https://github.com/ionic-team/angular-toolkit/compare/v2.3.3...v3.0.0) (2020-11-17)
+
+
+### Features
+
+* **deps:** update deps in packages.json ([e56c93e](https://github.com/ionic-team/angular-toolkit/commit/e56c93e29f024a82fe6dfe8573c5d6e3b7b01550))
+* update to support angular 11 ([afe9848](https://github.com/ionic-team/angular-toolkit/commit/afe9848974f72553a37e990b8d6b3410977b16f0)), closes [#388](https://github.com/ionic-team/angular-toolkit/issues/388)
+
+
+### BREAKING CHANGES
+
+* **deps:** Users are required to update to 11.0.0 of Angular/Angular CLI in order to use this.
+In order to migrate, please see https://update.angular.io
+
 ## [2.3.3](https://github.com/ionic-team/angular-toolkit/compare/v2.3.2...v2.3.3) (2020-08-24)
 
 
