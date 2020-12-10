@@ -52,7 +52,7 @@
     "@types/cheerio": "0.22.15",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/karma": "3.0.5",
-    "@types/node": "10.12.30",
+    "@types/node": "14.14.12",
     "@types/tapable": "1.0.4",
     "@types/webpack": "^4.41.22",
     "@types/webpack-dev-server": "^3.1.7",
