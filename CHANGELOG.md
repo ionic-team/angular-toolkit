@@ -1,3 +1,11 @@
+# [3.1.0](https://github.com/ionic-team/angular-toolkit/compare/v3.0.0...v3.1.0) (2021-02-12)
+
+
+### Features
+
+* **package:** update to Angular11.1 ([71b9800](https://github.com/ionic-team/angular-toolkit/commit/71b9800203db630a64a06e7b6cb60b7925c49743)), closes [#438](https://github.com/ionic-team/angular-toolkit/issues/438)
+* **test:** update async to waitForAsync ([#434](https://github.com/ionic-team/angular-toolkit/issues/434)) ([2185e50](https://github.com/ionic-team/angular-toolkit/commit/2185e50aa3e9bdc11115b71045f3ecd6c0e199a7))
+
 # [3.0.0](https://github.com/ionic-team/angular-toolkit/compare/v2.3.3...v3.0.0) (2020-11-17)
 
 
