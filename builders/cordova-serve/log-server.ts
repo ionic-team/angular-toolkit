@@ -13,14 +13,22 @@ export interface ConsoleLogServerOptions {
   consolelogsPort: number;
 }
 
-export function isConsoleLogServerMessage(m: any): m is ConsoleLogServerMessage {
-  return m
-    && typeof m.category === 'string'
-    && typeof m.type === 'string'
-    && m.data && typeof m.data.length === 'number';
+export function isConsoleLogServerMessage(
+  m: any,
+): m is ConsoleLogServerMessage {
+  return (
+    m &&
+    typeof m.category === 'string' &&
+    typeof m.type === 'string' &&
+    m.data &&
+    typeof m.data.length === 'number'
+  );
 }
 
-export async function createConsoleLogServer(host: string, port: number): Promise<WebSocket.Server> {
+export async function createConsoleLogServer(
+  host: string,
+  port: number,
+): Promise<WebSocket.Server> {
   const wss = new WebSocket.Server({ host, port });
 
   wss.on('connection', ws => {
@@ -31,7 +39,11 @@ export async function createConsoleLogServer(host: string, port: number): Promis
         data = data.toString();
         msg = JSON.parse(data);
       } catch (e) {
-        process.stderr.write(`Error parsing JSON message from client: "${data}" ${red(e.stack ? e.stack : e)}\n`);
+        process.stderr.write(
+          `Error parsing JSON message from client: "${data}" ${red(
+            e.stack ? e.stack : e,
+          )}\n`,
+        );
         return;
       }
 
@@ -53,9 +65,13 @@ export async function createConsoleLogServer(host: string, port: number): Promis
         }
 
         // pretty print objects and arrays (no newlines for arrays)
-        msg.data = msg.data.map(d => JSON.stringify(d, undefined, d && d.length ? '' : '  '));
+        msg.data = msg.data.map(d =>
+          JSON.stringify(d, undefined, d?.length ? '' : '  '),
+        );
         if (status) {
-          process.stdout.write(`[${status('console.' + msg.type)}]: ${msg.data.join(' ')}\n`);
+          process.stdout.write(
+            `[${status('console.' + msg.type)}]: ${msg.data.join(' ')}\n`,
+          );
         } else {
           process.stdout.write(`[console]: ${msg.data.join(' ')}\n`);
         }
@@ -64,13 +80,19 @@ export async function createConsoleLogServer(host: string, port: number): Promis
 
     ws.on('error', (err: NodeJS.ErrnoException) => {
       if (err && err.code !== 'ECONNRESET') {
-        process.stderr.write(`There was an error with the logging stream: ${JSON.stringify(err)}\n`);
+        process.stderr.write(
+          `There was an error with the logging stream: ${JSON.stringify(
+            err,
+          )}\n`,
+        );
       }
     });
   });
 
   wss.on('error', (err: NodeJS.ErrnoException) => {
-    process.stderr.write(`There was an error with the logging websocket: ${JSON.stringify(err)}\n`);
+    process.stderr.write(
+      `There was an error with the logging websocket: ${JSON.stringify(err)}\n`,
+    );
   });
 
   return wss;

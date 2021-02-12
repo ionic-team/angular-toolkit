@@ -1,15 +1,16 @@
-import { AssetPatternClass } from '@angular-devkit/build-angular/src/browser/schema';
+import type { AssetPatternClass } from '@angular-devkit/build-angular/src/browser/schema';
 import { normalizeExtraEntryPoints } from '@angular-devkit/build-angular/src/webpack/utils/helpers';
+import type { JsonObject } from '@angular-devkit/core';
 import { getSystemPath, join, normalize } from '@angular-devkit/core';
 import { writeFileSync } from 'fs';
 import { posix, resolve } from 'path';
 
-import { CordovaBuildBuilderSchema } from '../cordova-build/schema';
-import { CordovaServeBuilderSchema } from '../cordova-serve/schema';
+import type { CordovaBuildBuilderSchema } from '../cordova-build/schema';
+import type { CordovaServeBuilderSchema } from '../cordova-serve/schema';
 
 export function validateBuilderConfig(
-  builderOptions: CordovaBuildBuilderSchema
-) {
+  builderOptions: CordovaBuildBuilderSchema,
+): CordovaBuildBuilderSchema {
   // if we're mocking cordova.js, don't build cordova bundle
   const newOptions = { ...builderOptions };
   if (newOptions.cordovaMock) {
@@ -18,7 +19,7 @@ export function validateBuilderConfig(
 
   if (builderOptions.cordovaAssets && !builderOptions.platform) {
     throw new Error(
-      'The `--platform` option is required with `--cordova-assets`'
+      'The `--platform` option is required with `--cordova-assets`',
     );
   }
   return newOptions;
@@ -26,11 +27,11 @@ export function validateBuilderConfig(
 
 export function prepareBrowserConfig(
   options: CordovaBuildBuilderSchema | CordovaServeBuilderSchema | any,
-  browserOptions: any
-) {
+  browserOptions: any,
+): JsonObject {
   const optionsStarter = { ...browserOptions };
   const cordovaBasePath = normalize(
-    options.cordovaBasePath ? options.cordovaBasePath : '.'
+    options.cordovaBasePath ? options.cordovaBasePath : '.',
   );
 
   if (typeof options.sourceMap !== 'undefined') {
@@ -61,12 +62,12 @@ export function prepareBrowserConfig(
       join(
         normalize(__dirname),
         '../../assets',
-        normalize('consolelog-config.js')
-      )
+        normalize('consolelog-config.js'),
+      ),
     );
     writeFileSync(
       configPath,
-      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`
+      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`,
     );
     optionsStarter.scripts.push({
       input: configPath,
@@ -74,7 +75,7 @@ export function prepareBrowserConfig(
     });
     optionsStarter.scripts.push({
       input: getSystemPath(
-        join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))
+        join(normalize(__dirname), '../../assets', normalize('consolelogs.js')),
       ),
       bundleName: 'consolelogs',
     });
@@ -84,7 +85,7 @@ export function prepareBrowserConfig(
     if (browserOptions.scripts) {
       browserOptions.scripts.push({
         input: getSystemPath(
-          join(normalize(__dirname), '../../assets', normalize('cordova.js'))
+          join(normalize(__dirname), '../../assets', normalize('cordova.js')),
         ),
         bundleName: 'cordova',
       });
@@ -92,7 +93,7 @@ export function prepareBrowserConfig(
   } else if (options.cordovaAssets) {
     const platformWWWPath = join(
       cordovaBasePath,
-      normalize(`platforms/${options.platform}/platform_www`)
+      normalize(`platforms/${options.platform}/platform_www`),
     );
 
     // Add Cordova www assets that were generated whenever platform(s) and
@@ -131,12 +132,12 @@ export interface FormattedAssets {
 }
 export function prepareServerConfig(
   options: CordovaServeBuilderSchema,
-  root: string
+  root: string,
 ): FormattedAssets {
   const scripts = [];
   const assets = [];
   const cordovaBasePath = normalize(
-    options.cordovaBasePath ? options.cordovaBasePath : '.'
+    options.cordovaBasePath ? options.cordovaBasePath : '.',
   );
   if (options.consolelogs) {
     // Write the config to a file, and then include that in the bundle so it loads on window
@@ -144,17 +145,17 @@ export function prepareServerConfig(
       join(
         normalize(__dirname),
         '../../assets',
-        normalize('consolelog-config.js')
-      )
+        normalize('consolelog-config.js'),
+      ),
     );
     writeFileSync(
       configPath,
-      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`
+      `window.Ionic = window.Ionic || {}; Ionic.ConsoleLogServerConfig = { wsPort: ${options.consolelogsPort} }`,
     );
     scripts.push({ input: configPath, bundleName: 'consolelogs' });
     scripts.push({
       input: getSystemPath(
-        join(normalize(__dirname), '../../assets', normalize('consolelogs.js'))
+        join(normalize(__dirname), '../../assets', normalize('consolelogs.js')),
       ),
       bundleName: 'consolelogs',
     });
@@ -162,14 +163,14 @@ export function prepareServerConfig(
   if (options.cordovaMock) {
     scripts.push({
       input: getSystemPath(
-        join(normalize(__dirname), '../../assets', normalize('cordova.js'))
+        join(normalize(__dirname), '../../assets', normalize('cordova.js')),
       ),
       bundleName: 'cordova',
     });
   } else if (options.cordovaAssets) {
     const platformWWWPath = join(
       cordovaBasePath,
-      normalize(`platforms/${options.platform}/platform_www`)
+      normalize(`platforms/${options.platform}/platform_www`),
     );
     assets.push({
       glob: '**/*',
@@ -184,11 +185,11 @@ export function prepareServerConfig(
 
   const globalScriptsByBundleName = normalizeExtraEntryPoints(
     scripts,
-    'scripts'
+    'scripts',
   ).reduce(
     (
       prev: { bundleName: string; paths: string[]; inject: boolean }[],
-      curr
+      curr,
     ) => {
       const { bundleName, inject, input } = curr;
       const resolvedPath = resolve(root, input);
@@ -204,12 +205,12 @@ export function prepareServerConfig(
       }
       return prev;
     },
-    []
+    [],
   );
 
   const copyWebpackPluginPatterns = assets.map((asset: AssetPatternClass) => {
     // Resolve input paths relative to workspace root and add slash at the end.
-    // tslint:disable-next-line: prefer-const
+    // eslint-disable-next-line prefer-const
     let { input, output, ignore = [], glob } = asset;
     input = resolve(root, input).replace(/\\/g, '/');
     input = input.endsWith('/') ? input : input + '/';

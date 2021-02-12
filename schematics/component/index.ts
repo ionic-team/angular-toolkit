@@ -1,16 +1,39 @@
 import { strings } from '@angular-devkit/core';
-import { Rule, SchematicsException, Tree, apply, branchAndMerge, chain, filter, mergeWith, move, noop, template, url } from '@angular-devkit/schematics';
+import type { Rule, Tree } from '@angular-devkit/schematics';
+import {
+  SchematicsException,
+  apply,
+  branchAndMerge,
+  chain,
+  filter,
+  mergeWith,
+  move,
+  noop,
+  template,
+  url,
+} from '@angular-devkit/schematics';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
-import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
-import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
+import {
+  validateHtmlSelector,
+  validateName,
+} from '@schematics/angular/utility/validation';
+import {
+  buildDefaultPath,
+  getWorkspace,
+} from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 
 import { buildSelector } from '../util';
-import { addDeclarationToModule, addEntryComponentToModule, addExportToModule, addSymbolToNgModuleMetadata } from '../util/ast-util';
+import {
+  addDeclarationToModule,
+  addEntryComponentToModule,
+  addExportToModule,
+  addSymbolToNgModuleMetadata,
+} from '../util/ast-util';
 import { InsertChange } from '../util/change';
 
-import { Schema as ComponentOptions } from './schema';
+import type { Schema as ComponentOptions } from './schema';
 
 function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
   const text = host.read(modulePath);
@@ -19,7 +42,12 @@ function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
   }
   const sourceText = text.toString('utf-8');
 
-  return ts.createSourceFile(modulePath, sourceText, ts.ScriptTarget.Latest, true);
+  return ts.createSourceFile(
+    modulePath,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true,
+  );
 }
 
 function addImportToNgModule(options: ComponentOptions): Rule {
@@ -42,16 +70,19 @@ function addImportToDeclarations(host: Tree, options: ComponentOptions): void {
     const modulePath = options.module;
     let source = readIntoSourceFile(host, modulePath);
 
-    const componentPath = `/${options.path}/`
-                          + (options.flat ? '' : strings.dasherize(options.name) + '/')
-                          + strings.dasherize(options.name)
-                          + '.component';
+    const componentPath =
+      `/${options.path}/` +
+      (options.flat ? '' : strings.dasherize(options.name) + '/') +
+      strings.dasherize(options.name) +
+      '.component';
     const relativePath = buildRelativePath(modulePath, componentPath);
     const classifiedName = strings.classify(`${options.name}Component`);
-    const declarationChanges = addDeclarationToModule(source,
-                                                      modulePath,
-                                                      classifiedName,
-                                                      relativePath);
+    const declarationChanges = addDeclarationToModule(
+      source,
+      modulePath,
+      classifiedName,
+      relativePath,
+    );
 
     const declarationRecorder = host.beginUpdate(modulePath);
     for (const change of declarationChanges) {
@@ -66,9 +97,12 @@ function addImportToDeclarations(host: Tree, options: ComponentOptions): void {
       source = readIntoSourceFile(host, modulePath);
 
       const exportRecorder = host.beginUpdate(modulePath);
-      const exportChanges = addExportToModule(source, modulePath,
-                                              strings.classify(`${options.name}Component`),
-                                              relativePath);
+      const exportChanges = addExportToModule(
+        source,
+        modulePath,
+        strings.classify(`${options.name}Component`),
+        relativePath,
+      );
 
       for (const change of exportChanges) {
         if (change instanceof InsertChange) {
@@ -84,9 +118,11 @@ function addImportToDeclarations(host: Tree, options: ComponentOptions): void {
 
       const entryComponentRecorder = host.beginUpdate(modulePath);
       const entryComponentChanges = addEntryComponentToModule(
-        source, modulePath,
+        source,
+        modulePath,
         strings.classify(`${options.name}Component`),
-        relativePath);
+        relativePath,
+      );
 
       for (const change of entryComponentChanges) {
         if (change instanceof InsertChange) {
@@ -103,14 +139,21 @@ function addImportToImports(host: Tree, options: ComponentOptions): void {
     const modulePath = options.module;
     const moduleSource = readIntoSourceFile(host, modulePath);
 
-    const componentModulePath = `/${options.path}/`
-                          + (options.flat ? '' : strings.dasherize(options.name) + '/')
-                          + strings.dasherize(options.name)
-                          + '.module';
+    const componentModulePath =
+      `/${options.path}/` +
+      (options.flat ? '' : strings.dasherize(options.name) + '/') +
+      strings.dasherize(options.name) +
+      '.module';
 
     const relativePath = buildRelativePath(modulePath, componentModulePath);
     const classifiedName = strings.classify(`${options.name}ComponentModule`);
-    const importChanges = addSymbolToNgModuleMetadata(moduleSource, modulePath, 'imports', classifiedName, relativePath);
+    const importChanges = addSymbolToNgModuleMetadata(
+      moduleSource,
+      modulePath,
+      'imports',
+      classifiedName,
+      relativePath,
+    );
 
     const importRecorder = host.beginUpdate(modulePath);
     for (const change of importChanges) {
@@ -122,7 +165,7 @@ function addImportToImports(host: Tree, options: ComponentOptions): void {
   }
 }
 
-export default function(options: ComponentOptions): Rule {
+export default function (options: ComponentOptions): Rule {
   return async (host: Tree) => {
     if (!options.project) {
       throw new SchematicsException('Option (project) is required.');
@@ -137,7 +180,9 @@ export default function(options: ComponentOptions): Rule {
     const parsedPath = parseName(options.path as string, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
-    options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');
+    options.selector = options.selector
+      ? options.selector
+      : buildSelector(options, project?.prefix ?? 'app');
 
     validateName(options.name);
     validateHtmlSelector(options.selector);
@@ -147,17 +192,16 @@ export default function(options: ComponentOptions): Rule {
       options.createModule ? noop() : filter(p => !p.endsWith('.module.ts')),
       template({
         ...strings,
-        'if-flat': (s: string) => options.flat ? '' : s,
+        'if-flat': (s: string) => (options.flat ? '' : s),
         ...options,
       }),
       move(parsedPath.path),
     ]);
 
     return chain([
-      branchAndMerge(chain([
-        addImportToNgModule(options),
-        mergeWith(templateSource),
-      ])),
+      branchAndMerge(
+        chain([addImportToNgModule(options), mergeWith(templateSource)]),
+      ),
     ]);
   };
 }

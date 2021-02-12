@@ -11,13 +11,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2018",
-    "lib": [
-      "es2018"
-    ],
-    "plugins": [{ "name": "typescript-tslint-plugin" }],
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "lib": ["es2018"],
+    "plugins": [{ "name": "typescript-eslint-language-service" }],
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "**/__tests__/*.ts", "schematics/*/files"]

@@ -1,6 +1,6 @@
 import { strings } from '@angular-devkit/core';
 
-export function buildSelector(options: any, projectPrefix: string) {
+export function buildSelector(options: any, projectPrefix: string): string {
   let selector = strings.dasherize(options.name);
 
   if (options.prefix) {
