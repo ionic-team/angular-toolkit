@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/ionic-team/angular-toolkit/compare/v3.1.0...v3.1.1) (2021-03-16)
+
+
+### Bug Fixes
+
+* **deps:** rebuild lock file for new versions ([f2a48fe](https://github.com/ionic-team/angular-toolkit/commit/f2a48fe9ca23788b0b01a66c8c6f02431e687dac))
+
 # [3.1.0](https://github.com/ionic-team/angular-toolkit/compare/v3.0.0...v3.1.0) (2021-02-12)
 
 
