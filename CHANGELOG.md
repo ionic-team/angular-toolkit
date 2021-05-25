@@ -1,3 +1,16 @@
+# [4.0.0](https://github.com/ionic-team/angular-toolkit/compare/v3.1.1...v4.0.0) (2021-05-25)
+
+
+### Features
+
+* **package:** update to angular12 ([707175d](https://github.com/ionic-team/angular-toolkit/commit/707175df21762b0c35d8c9cb1d20e881c7b83fbf)), closes [#447](https://github.com/ionic-team/angular-toolkit/issues/447) [#448](https://github.com/ionic-team/angular-toolkit/issues/448)
+
+
+### BREAKING CHANGES
+
+* **package:** Users will need to upgrade to 12.0.0 of Angular/Angular CLI in order to use this.
+In order to migrate, please see https://update.angular.io
+
 ## [3.1.1](https://github.com/ionic-team/angular-toolkit/compare/v3.1.0...v3.1.1) (2021-03-16)
 
 
