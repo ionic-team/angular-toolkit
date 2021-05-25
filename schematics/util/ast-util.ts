@@ -207,9 +207,9 @@ export function getContentOfKeyLiteral(
   }
 }
 
-function _angularImportsFromNode(
-  node: ts.ImportDeclaration,
-): { [name: string]: string } {
+function _angularImportsFromNode(node: ts.ImportDeclaration): {
+  [name: string]: string;
+} {
   const ms = node.moduleSpecifier;
   let modulePath: string;
   switch (ms.kind) {
@@ -655,8 +655,9 @@ export function getEnvironmentExportName(source: ts.SourceFile): string | null {
     .map(declaration =>
       // If `importClause` property is defined then the first
       // child will be `NamedImports` object (or `namedBindings`).
-      ((declaration as ts.ImportDeclaration)
-        .importClause as ts.ImportClause).getChildAt(0),
+      (
+        (declaration as ts.ImportDeclaration).importClause as ts.ImportClause
+      ).getChildAt(0),
     )
     // Find those `NamedImports` object that contains `environment` keyword
     // in its text. E.g. `{ environment as env }`.
@@ -740,8 +741,9 @@ export function addRouteDeclarationToModule(
         .filter((s: ts.Statement) => s.kind === ts.SyntaxKind.VariableStatement)
         .find(v => {
           return (
-            (v as ts.VariableStatement).declarationList.declarations[0].name.getText() ===
-            routesVarName
+            (
+              v as ts.VariableStatement
+            ).declarationList.declarations[0].name.getText() === routesVarName
           );
         });
     }
