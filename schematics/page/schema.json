@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsIonicAngularPage",
+  "$id": "SchematicsIonicAngularPage",
   "title": "@ionic/angular Page Options Schema",
   "type": "object",
   "properties": {

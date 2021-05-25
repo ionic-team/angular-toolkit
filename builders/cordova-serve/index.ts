@@ -85,44 +85,43 @@ function getTransforms(
 const cordovaServeTransform: (
   formattedAssets: FormattedAssets,
   context: BuilderContext,
-) => ExecutionTransformer<Configuration> = (
-  formattedAssets,
-  { workspaceRoot },
-) => browserWebpackConfig => {
-  const scriptExtras = formattedAssets.globalScriptsByBundleName.map(
-    (script: { bundleName: any; paths: any }) => {
-      const bundleName = script.bundleName;
-      return new ScriptsWebpackPlugin({
-        name: bundleName,
-        sourceMap: true,
-        filename: `${basename(bundleName)}.js`,
-        scripts: script.paths,
-        basePath: workspaceRoot,
-      });
-    },
-  );
+) => ExecutionTransformer<Configuration> =
+  (formattedAssets, { workspaceRoot }) =>
+  browserWebpackConfig => {
+    const scriptExtras = formattedAssets.globalScriptsByBundleName.map(
+      (script: { bundleName: any; paths: any }) => {
+        const bundleName = script.bundleName;
+        return new ScriptsWebpackPlugin({
+          name: bundleName,
+          sourceMap: true,
+          filename: `${basename(bundleName)}.js`,
+          scripts: script.paths,
+          basePath: workspaceRoot,
+        });
+      },
+    );
 
-  const copyWebpackPluginInstance = new CopyWebpackPlugin({
-    patterns: formattedAssets.copyWebpackPluginPatterns,
-  });
+    const copyWebpackPluginInstance = new CopyWebpackPlugin({
+      patterns: formattedAssets.copyWebpackPluginPatterns,
+    });
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  browserWebpackConfig.plugins!.push(
-    ...scriptExtras,
-    copyWebpackPluginInstance,
-  );
-  return browserWebpackConfig;
-};
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    browserWebpackConfig.plugins!.push(
+      ...scriptExtras,
+      copyWebpackPluginInstance,
+    );
+    return browserWebpackConfig;
+  };
 
 export const indexHtmlTransformFactory: (
   formattedAssets: FormattedAssets,
   context: BuilderContext,
-) => IndexHtmlTransform = ({ globalScriptsByBundleName }) => (
-  indexTransform: string,
-) => {
-  const augmentedHtml = augmentIndexHtml(
-    indexTransform,
-    globalScriptsByBundleName,
-  );
-  return Promise.resolve(augmentedHtml);
-};
+) => IndexHtmlTransform =
+  ({ globalScriptsByBundleName }) =>
+  (indexTransform: string) => {
+    const augmentedHtml = augmentIndexHtml(
+      indexTransform,
+      globalScriptsByBundleName,
+    );
+    return Promise.resolve(augmentedHtml);
+  };
