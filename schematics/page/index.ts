@@ -225,7 +225,7 @@ export default function (options: PageOptions): Rule {
     validateHtmlSelector(options.selector);
 
     const templateSource = apply(url('./files'), [
-      options.spec ? noop() : filter(p => !p.endsWith('.spec.ts')),
+      options.skipTests ? noop() : filter(p => !p.endsWith('.spec.ts')),
       template({
         ...strings,
         'if-flat': (s: string) => (options.flat ? '' : s),

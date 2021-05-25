@@ -4,7 +4,7 @@ export interface Schema {
   name: string;
   prefix?: string;
   styleext?: string;
-  spec?: boolean;
+  skipTests?: boolean;
   flat?: boolean;
   selector?: string;
   module?: string;

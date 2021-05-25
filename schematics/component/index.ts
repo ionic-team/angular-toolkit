@@ -188,7 +188,7 @@ export default function (options: ComponentOptions): Rule {
     validateHtmlSelector(options.selector);
 
     const templateSource = apply(url('./files'), [
-      options.spec ? noop() : filter(p => !p.endsWith('.spec.ts')),
+      options.skipTests ? noop() : filter(p => !p.endsWith('.spec.ts')),
       options.createModule ? noop() : filter(p => !p.endsWith('.module.ts')),
       template({
         ...strings,
