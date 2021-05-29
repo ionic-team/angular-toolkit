@@ -44,7 +44,7 @@
       "description": "The file extension of the style file for the page",
       "default": "css"
     },
-    "spec": {
+    "skipTests": {
       "type": "boolean",
       "description": "Specifies if a spec file is generated",
       "default": true
