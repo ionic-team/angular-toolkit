@@ -20,22 +20,22 @@ rsync -avuP --exclude .git --exclude node_modules /path/to/git/angular-toolkit n
 
 ### Publishing
 
-CI automatically publishes the next version semantically from analyzing commits in `stable`. To maintain a shared history between `master` and `stable`, the branches must be rebased with each other locally.
+CI automatically publishes the next version semantically from analyzing commits in `stable`. To maintain a shared history between `main` and `stable`, the branches must be rebased with each other locally.
 
-* When it's time to cut a release from `master`:
+* When it's time to cut a release from `main`:
 
     ```
     git checkout stable
-    git rebase master
+    git rebase main
     git push origin stable
     ```
 
 * Await successful publish in CI. Ionitron will push the updated versions and tags to `stable`.
-* Sync `master` with `stable`.
+* Sync `main` with `stable`.
 
   ```
   git pull origin stable
-  git checkout master
+  git checkout main
   git rebase stable
-  git push origin master
+  git push origin main
   ```
