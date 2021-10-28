@@ -48,7 +48,7 @@ export function serveCordova(
     devServerTargetOptions.port = port;
     devServerTargetOptions.host = host;
     devServerTargetOptions.ssl = ssl;
-    // tslint:disable-next-line: no-unnecessary-type-assertion
+
     const formattedOptions = (await context.validateOptions(
       devServerTargetOptions,
       devServerName,
@@ -64,7 +64,7 @@ export function serveCordova(
     switchMap(({ formattedOptions, formattedAssets }) =>
       executeDevServerBuilder(
         formattedOptions,
-        context,
+        context as any,
         getTransforms(formattedAssets, context),
       ),
     ),
@@ -106,7 +106,7 @@ const cordovaServeTransform: (
     });
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    browserWebpackConfig.plugins!.push(
+    (browserWebpackConfig.plugins as any)?.push(
       ...scriptExtras,
       copyWebpackPluginInstance,
     );

@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "@schematics/angular": "^12.1.1",
-    "cheerio": "1.0.0-rc.4",
+    "cheerio": "1.0.0-rc.10",
     "colorette": "1.1.0",
     "copy-webpack-plugin": "^9.0.1",
     "tapable": "^2.2.0",
