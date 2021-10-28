@@ -1,3 +1,21 @@
+# [5.0.0](https://github.com/ionic-team/angular-toolkit/compare/v4.0.0...v5.0.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* bump cheerio to rc4 ([905cff2](https://github.com/ionic-team/angular-toolkit/commit/905cff2f48d001fbfe304ab8b786ef1c8ba8eccd)), closes [#456](https://github.com/ionic-team/angular-toolkit/issues/456)
+* update deps to match latest angular ([0100b8b](https://github.com/ionic-team/angular-toolkit/commit/0100b8b98ebcad8d1ad572d7042aaf9e49f30886)), closes [#455](https://github.com/ionic-team/angular-toolkit/issues/455) [#452](https://github.com/ionic-team/angular-toolkit/issues/452)
+
+
+### Features
+
+* update to support angular 12.0 ([671bfba](https://github.com/ionic-team/angular-toolkit/commit/671bfba7349768c80dc4cfe02fe8c91616927cf1)), closes [#459](https://github.com/ionic-team/angular-toolkit/issues/459) [#460](https://github.com/ionic-team/angular-toolkit/issues/460)
+
+
+### BREAKING CHANGES
+
+* Apps must use Angular 12.0
+
 # [4.0.0](https://github.com/ionic-team/angular-toolkit/compare/v3.1.1...v4.0.0) (2021-05-25)
 
 
