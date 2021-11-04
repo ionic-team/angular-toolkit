@@ -1,6 +1,6 @@
 {
   "name": "@ionic/angular-toolkit",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "license": "MIT",
   "description": "Schematics and builders for @ionic/angular apps.",
   "homepage": "https://ionicframework.com/",

@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/ionic-team/angular-toolkit/compare/v5.0.2...v5.0.3) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps:** use the correct version range ([83cd638](https://github.com/ionic-team/angular-toolkit/commit/83cd638dd0c70e0869d10ddc8e9bb97b3cd6e372))
+
 ## [5.0.2](https://github.com/ionic-team/angular-toolkit/compare/v5.0.1...v5.0.2) (2021-11-04)
 
 
