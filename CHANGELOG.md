@@ -1,3 +1,10 @@
+## [5.0.2](https://github.com/ionic-team/angular-toolkit/compare/v5.0.1...v5.0.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps:** move peer deps to hard deps ([d389cd3](https://github.com/ionic-team/angular-toolkit/commit/d389cd38c9e4834acba0cbfaa8c71e1c346bb872))
+
 ## [5.0.1](https://github.com/ionic-team/angular-toolkit/compare/v5.0.0...v5.0.1) (2021-11-04)
 
 
