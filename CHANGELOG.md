@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/ionic-team/angular-toolkit/compare/v5.0.0...v5.0.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* **deps:** remove peer dep on devkit/architect ([eb46e23](https://github.com/ionic-team/angular-toolkit/commit/eb46e231fd68dec26c168776379a8ed45be99dd4)), closes [#460](https://github.com/ionic-team/angular-toolkit/issues/460)
+
 # [5.0.0](https://github.com/ionic-team/angular-toolkit/compare/v4.0.0...v5.0.0) (2021-10-28)
 
 
