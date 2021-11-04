@@ -33,7 +33,11 @@
     "ionicframework"
   ],
   "dependencies": {
-    "@schematics/angular": "^12.1.1",
+    "@angular-devkit/architect": ">=0.120.0 <0.130.0",
+    "@angular-devkit/build-angular": "^12.0.0",
+    "@angular-devkit/core": "^12.1.1",
+    "@angular-devkit/schematics": "^12.0.0",
+    "@schematics/angular": "^12.0.0",
     "cheerio": "1.0.0-rc.10",
     "colorette": "1.1.0",
     "copy-webpack-plugin": "^9.0.1",
@@ -79,10 +83,6 @@
     "semantic-release": "^15.9.17",
     "typescript": "4.2.4",
     "typescript-eslint-language-service": "^4.1.3"
-  },
-  "peerDependencies": {
-    "@angular-devkit/build-angular": "^12.0.0",
-    "@angular-devkit/schematics": "^12.0.0"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
