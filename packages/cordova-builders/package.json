@@ -1,0 +1,55 @@
+{
+  "name": "@ionic/cordova-builders",
+  "version": "5.0.4-testing.4",
+  "license": "MIT",
+  "description": "Cordova builders for @ionic/angular apps",
+  "homepage": "https://ionicframework.com/",
+  "author": "Ionic Team <hi@ionicframework.com> (https://ionicframework.com)",
+  "scripts": {
+    "build": "tsc",
+    "lint": "true",
+    "watch": "tsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionic-team/angular-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/angular-toolkit/issues"
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../package.json"
+    ]
+  },
+  "keywords": [
+    "angular",
+    "Angular CLI",
+    "blueprints",
+    "code generation",
+    "devkit",
+    "schematics",
+    "ionic",
+    "ionic framework",
+    "ionicframework"
+  ],
+  "dependencies": {
+    "@angular-devkit/architect": "^0.1300.1",
+    "@angular-devkit/build-angular": "^13.0.1",
+    "@angular-devkit/core": "^13.0.1",
+    "cheerio": "^1.0.0-rc.10",
+    "colorette": "^2.0.16",
+    "copy-webpack-plugin": "^9.0.1",
+    "ws": "^8.2.3"
+  },
+  "devDependencies": {
+    "@types/copy-webpack-plugin": "^8.0.1",
+    "@types/node": "^16.11.7",
+    "@types/ws": "^8.2.0",
+    "lint-staged": "^12.0.2",
+    "typescript": ">=4.4.2 <4.5"
+  },
+  "builders": "./builders.json",
+  "gitHead": "35dbfaa5d93cb165387321a3f8a0f43e604f5d02"
+}

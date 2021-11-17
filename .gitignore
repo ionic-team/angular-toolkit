@@ -1,7 +1,9 @@
 node_modules
 **/*.js
 **/*.d.ts
-!builders/**/schema.d.ts
-!schematics/**/schema.d.ts
-!schematics/*/files/**/*
+!packages/cordova-builders/**/schema.d.ts
+!packages/cordova-builders/assets/*
+!packages/schematics/**/schema.d.ts
+!packages/schematics/*/files/**/*
+!packages/**/lint-staged.config.js
 .vscode

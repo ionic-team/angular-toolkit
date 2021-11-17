@@ -1,0 +1,16 @@
+{
+  "version": "independent",
+  "packages": ["packages/*"],
+  "command": {
+    "bootstrap": {
+      "hoist": true
+    },
+    "version": {
+      "allowBranch": "stable",
+      "conventionalCommits": true,
+      "createRelease": "github",
+      "message": "chore(release): publish [skip ci]",
+      "tagVersionPrefix": ""
+    }
+  }
+}
