@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.0.0 (2022-01-18)
+
+
+### Features
+
+* split tooling ([#465](https://github.com/ionic-team/angular-toolkit/issues/465)) ([a8303ec](https://github.com/ionic-team/angular-toolkit/commit/a8303ec5df92c9f463ded30fbcb97a908578adf5))
+
+
+### BREAKING CHANGES
+
+* ionic/angular + cordova users will now need to install @ionic/cordova-builders and
+update their angular.json to reflect the new package name
+
+* chore(): fix package description
+
+
+
+
+
 ## 5.0.4-testing.4 (2021-11-17)
 
 **Note:** Version bump only for package @ionic/cordova-builders
