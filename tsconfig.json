@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
     "allowUnreachableCode": false,
-    "declaration": true,
+    "baseUrl": ".",
+    "declaration": false,
     "importHelpers": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "pretty": true,
+    "preserveSymlinks": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "es2018",
     "lib": ["es2018"],
-    "plugins": [{ "name": "typescript-eslint-language-service" }],
-    "typeRoots": ["./node_modules/@types"]
+    "plugins": [{ "name": "typescript-eslint-language-service" }]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "**/__tests__/*.ts", "schematics/*/files"]

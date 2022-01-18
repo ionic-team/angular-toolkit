@@ -14,7 +14,7 @@ import {
 } from '@angular-devkit/schematics';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
 import { parseName } from '@schematics/angular/utility/parse-name';
-import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
+import { validateHtmlSelector } from '@schematics/angular/utility/validation';
 import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 
@@ -166,7 +166,6 @@ export default function (options: ComponentOptions): Rule {
     options.path = parsedPath.path;
     options.selector = options.selector ? options.selector : buildSelector(options, project?.prefix ?? 'app');
 
-    validateName(options.name);
     validateHtmlSelector(options.selector);
 
     const templateSource = apply(url('./files'), [
