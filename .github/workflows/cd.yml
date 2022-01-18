@@ -23,8 +23,8 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.OS }}-dependency-cache-${{ hashFiles('**/package.json') }}
-      - run: npm install
-      - run: npm run bootstrap
+      - run: npm ci --no-package-lock
+      - run: npm run bootstrap -- --ignore-scripts
       - run: npm run publish:ci
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
