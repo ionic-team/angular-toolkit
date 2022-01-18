@@ -1,0 +1,48 @@
+{
+  "name": "@ionic/angular-toolkit",
+  "version": "5.0.4-testing.4",
+  "license": "MIT",
+  "description": "Schematics for @ionic/angular apps.",
+  "homepage": "https://ionicframework.com/",
+  "author": "Ionic Team <hi@ionicframework.com> (https://ionicframework.com)",
+  "scripts": {
+    "build": "tsc",
+    "lint": "true",
+    "watch": "tsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ionic-team/angular-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ionic-team/angular-toolkit/issues"
+  },
+  "keywords": [
+    "angular",
+    "Angular CLI",
+    "blueprints",
+    "code generation",
+    "devkit",
+    "schematics",
+    "ionic",
+    "ionic framework",
+    "ionicframework"
+  ],
+  "dependencies": {
+    "@angular-devkit/core": "^13.0.1",
+    "@angular-devkit/schematics": "^13.0.1",
+    "@schematics/angular": "^13.0.1"
+  },
+  "devDependencies": {
+    "lint-staged": "^12.0.2",
+    "typescript": ">=4.4.2 <4.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "../../package.json"
+    ]
+  },
+  "schematics": "./collection.json",
+  "gitHead": "35dbfaa5d93cb165387321a3f8a0f43e604f5d02"
+}
