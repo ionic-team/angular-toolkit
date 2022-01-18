@@ -25,8 +25,7 @@ jobs:
           key: ${{ runner.OS }}-dependency-cache-${{ hashFiles('**/package.json') }}
       - run: npm install
       - run: npm run bootstrap
-      - run: npm run publish:ci:testing
-      # - run: npm run publish:ci -- --yes
+      - run: npm run publish:ci -- --yes
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_AUTHOR_NAME: Ionitron
