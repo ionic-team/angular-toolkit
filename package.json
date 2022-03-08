@@ -11,7 +11,7 @@
     "lint:fix": "lerna run lint -- -- --fix",
     "prepublishOnly": "npm run build",
     "publish:testing": "lerna publish prerelease --preid=testing --exact --no-git-tag-version --no-push --dist-tag=testing",
-    "publish:ci": "lerna publish -m 'chore(release): publish [skip ci]' --exact --conventional-commits --yes",
+    "publish:ci": "lerna publish -m 'chore(release): publish [skip ci]' --exact --conventional-commits --yes --no-verify-access",
     "publish:ci:testing": "lerna publish prerelease --preid=testing --no-git-tag-version --no-push --dist-tag=testing  -m 'chore(release): publish [skip ci]' --exact --conventional-commits --yes",
     "cz": "git-cz"
   },

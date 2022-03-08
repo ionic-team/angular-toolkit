@@ -11,6 +11,9 @@
       "createRelease": "github",
       "message": "chore(release): publish [skip ci]",
       "tagVersionPrefix": ""
+    },
+    "publish": {
+      "verifyAccess": false
     }
   }
 }
