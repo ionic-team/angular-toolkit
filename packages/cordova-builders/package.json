@@ -38,6 +38,8 @@
     "@angular-devkit/architect": "^0.1300.1",
     "@angular-devkit/build-angular": "^13.0.1",
     "@angular-devkit/core": "^13.0.1",
+    "@angular-devkit/schematics": "^13.0.1",
+    "@schematics/angular": "^13.0.1",
     "cheerio": "^1.0.0-rc.10",
     "colorette": "^2.0.16",
     "copy-webpack-plugin": "^9.0.1",
@@ -51,5 +53,6 @@
     "typescript": ">=4.4.2 <4.5"
   },
   "builders": "./builders.json",
+  "schematics": "./collection.json",
   "gitHead": "35dbfaa5d93cb165387321a3f8a0f43e604f5d02"
 }
