@@ -28,6 +28,10 @@
       "aliases": ["g"],
       "extends": "@schematics/angular:guard"
     },
+    "resolver": {
+      "aliases": ["r"],
+      "extends": "@schematics/angular:resolver"
+    },
     "interface": {
       "aliases": ["i"],
       "extends": "@schematics/angular:interface"
