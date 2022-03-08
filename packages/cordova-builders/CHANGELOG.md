@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@6.0.0...@ionic/cordova-builders@6.1.0) (2022-03-08)
+
+
+### Features
+
+* add cordova-builders ng-add ([#467](https://github.com/ionic-team/angular-toolkit/issues/467)) ([1b9a0bd](https://github.com/ionic-team/angular-toolkit/commit/1b9a0bdabdbdcd1f6226a8ddc771abd1f54afd42))
+
+
+
+
+
 # 6.0.0 (2022-01-18)
 
 

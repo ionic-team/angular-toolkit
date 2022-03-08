@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@6.0.0...@ionic/angular-toolkit@6.1.0) (2022-03-08)
+
+
+### Features
+
+* add resolver to collections ([08375b7](https://github.com/ionic-team/angular-toolkit/commit/08375b786327c39575efba5fee88aa15f9acc126)), closes [#461](https://github.com/ionic-team/angular-toolkit/issues/461)
+
+
+
+
+
 # 6.0.0 (2022-01-18)
 
 
