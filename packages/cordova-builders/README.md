@@ -1,6 +1,9 @@
 # `@ionic/cordova-builders`
 
-> TODO: description
+A collection of builders for `@ionic/angular` projects using Cordova.
 
-## Usage
+To add these builders to your project, run
 
+```shell
+ng add @ionic/cordova-builders
+```

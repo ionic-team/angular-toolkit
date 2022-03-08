@@ -1,11 +1,5 @@
-# `schematics`
+# `@ionic/angular-toolkit`
 
-> TODO: description
+A collection of schematics for `@ionic/angular` projects.
 
-## Usage
-
-```
-const schematics = require('schematics');
-
-// TODO: DEMONSTRATE API
-```
+This packages is provided by default to all `@ionic/angular` projects by default.
