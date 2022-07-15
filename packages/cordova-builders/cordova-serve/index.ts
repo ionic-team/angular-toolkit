@@ -34,17 +34,14 @@ export function serveCordova(
   const devServerTargetSpec = targetFromTargetString(devServerTarget);
 
   async function setup() {
-    const devServerTargetOptions = (await context.getTargetOptions(devServerTargetSpec)) as DevServerBuilderOptions;
+    const devServerTargetOptions = await context.getTargetOptions(devServerTargetSpec);
     const devServerName = await context.getBuilderNameForTarget(devServerTargetSpec);
 
     devServerTargetOptions.port = port;
     devServerTargetOptions.host = host;
     devServerTargetOptions.ssl = ssl;
 
-    const formattedOptions = (await context.validateOptions(
-      devServerTargetOptions,
-      devServerName
-    )) as DevServerBuilderOptions;
+    const formattedOptions = await context.validateOptions(devServerTargetOptions, devServerName);
     const formattedAssets = prepareServerConfig(options, root);
     if (options.consolelogs && options.consolelogsPort) {
       await createConsoleLogServer(host, options.consolelogsPort);
@@ -54,7 +51,11 @@ export function serveCordova(
 
   return from(setup()).pipe(
     switchMap(({ formattedOptions, formattedAssets }) =>
-      executeDevServerBuilder(formattedOptions, context as any, getTransforms(formattedAssets, context))
+      executeDevServerBuilder(
+        formattedOptions as unknown as DevServerBuilderOptions,
+        context as any,
+        getTransforms(formattedAssets, context)
+      )
     )
   );
 }
