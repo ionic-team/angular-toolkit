@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@6.1.0...@ionic/angular-toolkit@7.0.0) (2022-07-18)
+
+
+### Bug Fixes
+
+* **schematics:** provide default path value ([07bba34](https://github.com/ionic-team/angular-toolkit/commit/07bba341490b7e9f8ce3483c3c78e4761d592cc0)), closes [#473](https://github.com/ionic-team/angular-toolkit/issues/473)
+
+
+### Features
+
+* bump deps to angular 14 ([767598e](https://github.com/ionic-team/angular-toolkit/commit/767598eace5bc91767008fd86670729c8079a1d9)), closes [#474](https://github.com/ionic-team/angular-toolkit/issues/474)
+
+
+### BREAKING CHANGES
+
+* Apps will need to update to Angular 14 in order to suppor this verion.
+
+
+
+
+
 # [6.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@6.0.0...@ionic/angular-toolkit@6.1.0) (2022-03-08)
 
 
