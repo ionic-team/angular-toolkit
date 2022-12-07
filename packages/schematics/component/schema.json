@@ -80,6 +80,11 @@
       "type": "boolean",
       "default": false,
       "description": "When true, the new component is the entry component of the declaring NgModule."
+    },
+    "type": {
+      "type": "string",
+      "description": "Adds a developer-defined type to the filename, in the format \"name.type.ts\".",
+      "default": "Component"
     }
   },
   "required": []

@@ -1,5 +1,5 @@
 import { strings } from '@angular-devkit/core';
-import type { Rule, Tree } from '@angular-devkit/schematics';
+import { FileOperator, forEach, Rule, Tree } from '@angular-devkit/schematics';
 import {
   SchematicsException,
   apply,
@@ -9,7 +9,7 @@ import {
   mergeWith,
   move,
   noop,
-  template,
+  applyTemplates,
   url,
 } from '@angular-devkit/schematics';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
@@ -169,13 +169,23 @@ export default function (options: ComponentOptions): Rule {
     validateHtmlSelector(options.selector);
 
     const templateSource = apply(url('./files'), [
-      options.spec ? noop() : filter((p) => !p.endsWith('.spec.ts')),
-      options.createModule ? noop() : filter((p) => !p.endsWith('.module.ts')),
-      template({
+      options.spec ? noop() : filter((p) => !p.endsWith('.spec.ts.template')),
+      options.createModule ? noop() : filter((p) => !p.endsWith('.module.ts.template')),
+      applyTemplates({
         ...strings,
         'if-flat': (s: string) => (options.flat ? '' : s),
         ...options,
       }),
+      options.type
+        ? noop()
+        : forEach(((file) => {
+            return file.path.includes('..')
+              ? {
+                  content: file.content,
+                  path: file.path.replace('..', '.'),
+                }
+              : file;
+          }) as FileOperator),
       move(parsedPath.path),
     ]);
 
