@@ -1,6 +1,6 @@
 {
   "name": "@ionic/cordova-builders",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "license": "MIT",
   "description": "Cordova builders for @ionic/angular apps",
   "homepage": "https://ionicframework.com/",
