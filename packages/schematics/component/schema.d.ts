@@ -11,4 +11,5 @@ export interface Schema {
   module?: string;
   export?: boolean;
   entryComponent?: boolean;
+  type?: string;
 }

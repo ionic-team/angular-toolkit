@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         node:
-          - 14.x
+          - 18.x
     steps:
       - uses: actions/setup-node@v1
         with:
@@ -27,6 +27,6 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.OS }}-dependency-cache-${{ hashFiles('**/package.json') }}
-      - run: npm install
+      - run: npm ci
       - run: npm run bootstrap
       - run: npm run lint
