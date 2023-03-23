@@ -9,4 +9,5 @@ export interface Schema {
   selector?: string;
   module?: string;
   routePath?: string;
+  standalone?: boolean;
 }
