@@ -71,6 +71,11 @@
       "type": "string",
       "description": "The path to use for the route of the page",
       "default": ""
+    },
+    "standalone": {
+      "type": "boolean",
+      "description": "Specifies if the page should be standalone",
+      "default": false
     }
   },
   "required": []
