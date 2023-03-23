@@ -50,12 +50,13 @@ export function serveCordova(
   }
 
   return from(setup()).pipe(
-    switchMap(({ formattedOptions, formattedAssets }) =>
-      executeDevServerBuilder(
-        formattedOptions as unknown as DevServerBuilderOptions,
-        context as any,
-        getTransforms(formattedAssets, context)
-      )
+    switchMap(
+      ({ formattedOptions, formattedAssets }) =>
+        executeDevServerBuilder(
+          formattedOptions as unknown as DevServerBuilderOptions,
+          context as any,
+          getTransforms(formattedAssets, context)
+        ) as unknown as Observable<any>
     )
   );
 }
