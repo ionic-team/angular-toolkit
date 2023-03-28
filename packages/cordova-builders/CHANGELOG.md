@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@8.0.0...@ionic/cordova-builders@9.0.0) (2023-03-28)
+
+
+### Features
+
+* bump deps to angular 15 ([009079a](https://github.com/ionic-team/angular-toolkit/commit/009079a5cf13804d55a7b1d15c79824cac9db179))
+
+
+### BREAKING CHANGES
+
+* Apps will need to update to Angular 15 in order to suppor this verion.
+
+
+
+
+
 # [8.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@7.0.0...@ionic/cordova-builders@8.0.0) (2023-02-15)
 
 

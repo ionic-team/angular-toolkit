@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@8.0.0...@ionic/angular-toolkit@8.1.0) (2023-03-28)
+
+
+### Features
+
+* add support for standalone pages ([5523f7a](https://github.com/ionic-team/angular-toolkit/commit/5523f7a8b891b86a0db0ab7781529211cd6a9d83))
+* **page:** add large header ([e018d4a](https://github.com/ionic-team/angular-toolkit/commit/e018d4ae29726d3ab2bf4cf9f372b1ca95df610b))
+
+
+
+
+
 # [8.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@7.0.0...@ionic/angular-toolkit@8.0.0) (2023-02-15)
 
 
