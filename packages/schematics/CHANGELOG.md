@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@8.1.0...@ionic/angular-toolkit@9.0.0) (2023-03-28)
+
+
+### Features
+
+* **schematics:** bump deps ([19f1abc](https://github.com/ionic-team/angular-toolkit/commit/19f1abc79df3e037744df859e13f2c8f5bd7b985))
+
+
+### BREAKING CHANGES
+
+* **schematics:** This bumps angualr-toolkit to support version 15 of angular
+
+
+
+
+
 # [8.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@8.0.0...@ionic/angular-toolkit@8.1.0) (2023-03-28)
 
 
