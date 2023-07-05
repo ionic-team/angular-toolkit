@@ -11,4 +11,3 @@ node_modules
 !packages/schematics/*/files/**/*
 !packages/**/lint-staged.config.js
 .vscode
-.npmrc
