@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@9.0.0...@ionic/angular-toolkit@10.0.0) (2023-07-06)
+
+
+### Bug Fixes
+
+* remove extra parentheses with spec test ([#490](https://github.com/ionic-team/angular-toolkit/issues/490)) ([87b1018](https://github.com/ionic-team/angular-toolkit/commit/87b1018c65048f90db2ab50a486aa4c392bb1c8b)), closes [#489](https://github.com/ionic-team/angular-toolkit/issues/489)
+* **template:** fix page component test ([a2a4b80](https://github.com/ionic-team/angular-toolkit/commit/a2a4b80c1329202ee2c02aff9531585e0352cc7a))
+
+
+### Features
+
+* **builders:** add support for angular 16.0 ([379d8d4](https://github.com/ionic-team/angular-toolkit/commit/379d8d43d066b1cd556b083ccb506703a166ce1d)), closes [#493](https://github.com/ionic-team/angular-toolkit/issues/493) [#494](https://github.com/ionic-team/angular-toolkit/issues/494)
+
+
+### BREAKING CHANGES
+
+* **builders:** The minimum version of Angular required is now 16. Please updates your apps to use
+the lates release of Angular
+
+
+
+
+
 # [9.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@8.1.0...@ionic/angular-toolkit@9.0.0) (2023-03-28)
 
 
