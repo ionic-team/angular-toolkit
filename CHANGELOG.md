@@ -1,3 +1,10 @@
+# Historical Changelog
+
+This changelog is here for historical reasons. The current and active changelogs for each of the packages in this monorepo can be found here
+
+- [`@ionic/angular-toolkit`](https://github.com/ionic-team/angular-toolkit/blob/main/packages/schematics/CHANGELOG.md)
+- [`@ionic/cordova-builders`](https://github.com/ionic-team/angular-toolkit/blob/main/packages/cordova-builders/CHANGELOG.md)
+
 ## [5.0.3](https://github.com/ionic-team/angular-toolkit/compare/v5.0.2...v5.0.3) (2021-11-04)
 
 
