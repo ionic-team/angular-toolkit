@@ -26,7 +26,10 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install Dependencies
-        run: npm ci --no-package-lock && lerna bootstrap --ignore-scripts
+        run: npm ci --no-package-lock
+        shell: bash
+      - name: Bootstrap
+        run: npm run bootstrap -- --ignore-scripts
         shell: bash
       - name: Release
         run: npm run publish:ci
