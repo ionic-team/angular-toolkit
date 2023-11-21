@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { <%= classify(name) %>Page } from './<%= dasherize(name) %>.page';
 
 describe('<%= classify(name) %>Page', () => {
