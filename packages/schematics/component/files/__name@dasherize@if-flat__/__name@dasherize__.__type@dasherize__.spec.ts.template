@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';<% if(!standalone) {%>
+import { IonicModule } from '@ionic/angular';<%} %>
 
 import { <%= classify(name) %><%= classify(type) %> } from './<%= dasherize(name) %>.<%= dasherize(type) %>';
 
@@ -8,9 +8,10 @@ describe('<%= classify(name) %><%= classify(type) %>', () => {
   let fixture: ComponentFixture<<%= classify(name) %><%= classify(type) %>>;
 
   beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+    TestBed.configureTestingModule({<% if(!standalone) {%>
       declarations: [ <%= classify(name) %><%= classify(type) %> ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()]<%} %><% if(standalone) {%>
+      imports: [<%= classify(name) %><%= classify(type) %>],<%} %>
     }).compileComponents();
 
     fixture = TestBed.createComponent(<%= classify(name) %><%= classify(type) %>);
