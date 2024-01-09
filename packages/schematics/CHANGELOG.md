@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@10.0.0...@ionic/angular-toolkit@10.1.0) (2024-01-09)
+
+
+### Bug Fixes
+
+* **page:** remove waitFromAsync from beforeEach ([#501](https://github.com/ionic-team/angular-toolkit/issues/501)) ([55527e7](https://github.com/ionic-team/angular-toolkit/commit/55527e786df3e19b6e16fa0ad799d0c10bec104d))
+
+
+### Features
+
+* **schematics:** use Ionic standalone components ([#504](https://github.com/ionic-team/angular-toolkit/issues/504)) ([8d6ce1c](https://github.com/ionic-team/angular-toolkit/commit/8d6ce1c4b7622ec4afa746bf8d97a87f668b61bd)), closes [#500](https://github.com/ionic-team/angular-toolkit/issues/500)
+* support angular 17 ([#503](https://github.com/ionic-team/angular-toolkit/issues/503)) ([26f0cd9](https://github.com/ionic-team/angular-toolkit/commit/26f0cd9a17b1489a1e864bb468f4e51315d4a004)), closes [#502](https://github.com/ionic-team/angular-toolkit/issues/502)
+
+
+
+
+
 # [10.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@9.0.0...@ionic/angular-toolkit@10.0.0) (2023-07-06)
 
 
