@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.1](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@10.1.0...@ionic/angular-toolkit@10.1.1) (2024-01-09)
+
+
+### Reverts
+
+* Revert "feat: support angular 17 (#503)" ([feb6361](https://github.com/ionic-team/angular-toolkit/commit/feb6361f1452e5ccbe242b0e00c0ded05beacec4)), closes [#503](https://github.com/ionic-team/angular-toolkit/issues/503)
+
+
+
+
+
 # [10.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@10.0.0...@ionic/angular-toolkit@10.1.0) (2024-01-09)
 
 
