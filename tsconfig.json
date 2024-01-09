@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2018",
-    "lib": ["es2018"],
+    "lib": ["es2018", "dom"],
     "plugins": [{ "name": "typescript-eslint-language-service" }]
   },
   "include": ["**/*.ts"],
