@@ -85,6 +85,11 @@
       "type": "string",
       "description": "Adds a developer-defined type to the filename, in the format \"name.type.ts\".",
       "default": "Component"
+    },
+    "standalone": {
+      "type": "boolean",
+      "description": "Specifies if the component should be standalone",
+      "default": false
     }
   },
   "required": []
