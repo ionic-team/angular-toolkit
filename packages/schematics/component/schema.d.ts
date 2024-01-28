@@ -12,4 +12,5 @@ export interface Schema {
   export?: boolean;
   entryComponent?: boolean;
   type?: string;
+  standalone?: boolean;
 }
