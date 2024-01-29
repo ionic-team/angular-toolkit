@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.1](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@11.0.0...@ionic/angular-toolkit@11.0.1) (2024-01-29)
+
+
+### Bug Fixes
+
+* standalone component can be created ([#510](https://github.com/ionic-team/angular-toolkit/issues/510)) ([cc17ab5](https://github.com/ionic-team/angular-toolkit/commit/cc17ab51bf8b3e03a9cd18c1a8e3e527d63519ef))
+
+
+
+
+
 # [11.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@10.1.1...@ionic/angular-toolkit@11.0.0) (2024-01-09)
 
 
