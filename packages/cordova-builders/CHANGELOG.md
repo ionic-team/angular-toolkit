@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@10.1.1...@ionic/cordova-builders@11.0.0) (2024-09-01)
+
+
+### Features
+
+* support angular 18 ([#508](https://github.com/ionic-team/angular-toolkit/issues/508)) ([c002c51](https://github.com/ionic-team/angular-toolkit/commit/c002c51cc09f45639ca97bc5354840d9c384556c))
+
+
+### BREAKING CHANGES
+
+* The minimum version of Angular required is now 18. Please updates your apps to use
+the latest release of Angular.
+
 # [11.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@10.1.1...@ionic/cordova-builders@11.0.0) (2024-01-09)
 
 
