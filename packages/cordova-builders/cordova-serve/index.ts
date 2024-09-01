@@ -6,7 +6,7 @@ import type {
   DevServerBuilderOptions,
   DevServerBuilderOutput,
 } from '@angular-devkit/build-angular';
-import type { IndexHtmlTransform } from '@angular-devkit/build-angular/src/utils/index-file/index-html-generator';
+import type { IndexHtmlTransform } from '@angular/build/src/utils/index-file/index-html-generator';
 import { ScriptsWebpackPlugin } from '@angular-devkit/build-angular/src/tools/webpack/plugins';
 import type { json } from '@angular-devkit/core';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
