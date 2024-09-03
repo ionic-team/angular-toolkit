@@ -1,6 +1,6 @@
 {
   "name": "@ionic/cordova-builders",
-  "version": "12.0.0",
+  "version": "12.1.0",
   "license": "MIT",
   "description": "Cordova builders for @ionic/angular apps",
   "homepage": "https://ionicframework.com/",
@@ -46,13 +46,12 @@
     "ws": "^8.2.3"
   },
   "devDependencies": {
+    "@angular-eslint/builder": "^18.3.0",
+    "@angular-eslint/eslint-plugin": "^18.0.1",
     "@types/node": "^16.11.7",
     "@types/ws": "^8.5.12",
     "lint-staged": "^15.2.9",
-    "typescript": "~5.5.4",
-    "@angular-eslint/builder": "^18.3.0",
-    "@angular-eslint/eslint-plugin": "^18.0.1"
-
+    "typescript": "~5.5.4"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
