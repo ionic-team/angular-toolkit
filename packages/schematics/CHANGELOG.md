@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.1.1](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@12.1.0...@ionic/angular-toolkit@12.1.1) (2024-09-03)
+
+
+### Bug Fixes
+
+* release bump ([#514](https://github.com/ionic-team/angular-toolkit/issues/514)) ([d084c97](https://github.com/ionic-team/angular-toolkit/commit/d084c9790745163e29d2e3441345c1acf852fc90))
+
+
+
+
+
 # [12.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/angular-toolkit@11.0.1...@ionic/angular-toolkit@12.1.0) (2024-09-03)
 
 
