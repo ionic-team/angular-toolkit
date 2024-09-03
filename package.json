@@ -43,7 +43,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lerna": "^8.1.8",
+    "lerna": "^4.0.0",
     "prettier": "^2.4.1",
     "typescript": "~5.4.0",
     "typescript-eslint-language-service": "^4.1.3"

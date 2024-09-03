@@ -6,7 +6,6 @@ import type {
   DevServerBuilderOptions,
   DevServerBuilderOutput,
 } from '@angular-devkit/build-angular';
-import type { IndexHtmlTransform } from '@angular/build/src/utils/index-file/index-html-generator';
 import { ScriptsWebpackPlugin } from '@angular-devkit/build-angular/src/tools/webpack/plugins';
 import type { json } from '@angular-devkit/core';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -74,33 +73,33 @@ const cordovaServeTransform: (
   context: BuilderContext
 ) => ExecutionTransformer<Configuration> =
   (formattedAssets, { workspaceRoot }) =>
-  (browserWebpackConfig) => {
-    const scriptExtras = formattedAssets.globalScriptsByBundleName.map((script: { bundleName: any; paths: any }) => {
-      const bundleName = script.bundleName;
-      return new ScriptsWebpackPlugin({
-        name: bundleName,
-        sourceMap: true,
-        filename: `${basename(bundleName)}.js`,
-        scripts: script.paths,
-        basePath: workspaceRoot,
+    (browserWebpackConfig) => {
+      const scriptExtras = formattedAssets.globalScriptsByBundleName.map((script: { bundleName: any; paths: any }) => {
+        const bundleName = script.bundleName;
+        return new ScriptsWebpackPlugin({
+          name: bundleName,
+          sourceMap: true,
+          filename: `${basename(bundleName)}.js`,
+          scripts: script.paths,
+          basePath: workspaceRoot,
+        });
       });
-    });
 
-    const copyWebpackPluginInstance = new CopyWebpackPlugin({
-      patterns: formattedAssets.copyWebpackPluginPatterns,
-    });
+      const copyWebpackPluginInstance = new CopyWebpackPlugin({
+        patterns: formattedAssets.copyWebpackPluginPatterns,
+      });
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    (browserWebpackConfig.plugins as any)?.push(...scriptExtras, copyWebpackPluginInstance);
-    return browserWebpackConfig;
-  };
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      (browserWebpackConfig.plugins as any)?.push(...scriptExtras, copyWebpackPluginInstance);
+      return browserWebpackConfig;
+    };
 
 export const indexHtmlTransformFactory: (
   formattedAssets: FormattedAssets,
   context: BuilderContext
-) => IndexHtmlTransform =
+) => (content: string) => Promise<string> =
   ({ globalScriptsByBundleName }) =>
-  (indexTransform: string) => {
-    const augmentedHtml = augmentIndexHtml(indexTransform, globalScriptsByBundleName);
-    return Promise.resolve(augmentedHtml);
-  };
+    (indexTransform: string) => {
+      const augmentedHtml = augmentIndexHtml(indexTransform, globalScriptsByBundleName);
+      return Promise.resolve(augmentedHtml);
+    };
