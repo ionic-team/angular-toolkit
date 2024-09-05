@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.1.1](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@12.1.0...@ionic/cordova-builders@12.1.1) (2024-09-05)
+
+
+### Bug Fixes
+
+* **cordova-builders:** release bump ([#515](https://github.com/ionic-team/angular-toolkit/issues/515)) ([047a563](https://github.com/ionic-team/angular-toolkit/commit/047a563db305a07e1a18ac08935d2809dc3a9a04))
+
+
+
+
+
 # [12.1.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@11.0.0...@ionic/cordova-builders@12.1.0) (2024-09-03)
 
 
