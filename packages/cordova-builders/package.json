@@ -51,7 +51,7 @@
     "@types/node": "^18.19 || ^20.11 || ^22.0.0",
     "@types/ws": "^8.5.12",
     "lint-staged": "^15.2.9",
-    "typescript": ">=5.5.0 <5.7.0"
+    "typescript": ">=5.5.0 <5.9.0"
   },
   "builders": "./builders.json",
   "schematics": "./collection.json",
