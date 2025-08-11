@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.3.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@12.2.0...@ionic/cordova-builders@12.3.0) (2025-08-11)
+
+
+### Features
+
+* support angular 20 ([#524](https://github.com/ionic-team/angular-toolkit/issues/524)) ([3525b21](https://github.com/ionic-team/angular-toolkit/commit/3525b2151cca563015618eb0745639133d273842))
+
+
+
+
+
 # [12.2.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@12.1.2...@ionic/cordova-builders@12.2.0) (2025-04-10)
 
 
