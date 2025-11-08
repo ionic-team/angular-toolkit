@@ -5,33 +5,36 @@ on:
     branches:
       - stable
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build:
     name: Build, Test, and Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: 18
-      - name: Configure Identity
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+      - name: 🔒 Configure Identity
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-      - name: Prepare NPM Token
-        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+      - name: 🟢 Ensure Latest npm
+        run: npm install -g npm@latest
         shell: bash
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Install Dependencies
+      - name: 📦 Install Dependencies
         run: npm ci --no-package-lock
         shell: bash
-      - name: Bootstrap
+      - name: 🔄 Bootstrap
         run: npm run bootstrap -- --ignore-scripts
         shell: bash
-      - name: Release
+      - name: 🚀 Release
         run: npm run publish:ci
         shell: bash
         env:
