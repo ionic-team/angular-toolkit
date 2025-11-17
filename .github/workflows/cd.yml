@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
+          scope: '@ionic'
       - name: 🔒 Configure Identity
         run: |
           git config user.name github-actions
@@ -39,3 +40,4 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
