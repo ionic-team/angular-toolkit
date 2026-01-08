@@ -62,7 +62,7 @@
       "format": "html-selector",
       "description": "The selector to use for the page"
     },
-    "createModule":  {
+    "createModule": {
       "type": "boolean",
       "description": "Allows creating an NgModule for the component",
       "default": false
@@ -90,6 +90,13 @@
       "type": "boolean",
       "description": "Specifies if the component should be standalone",
       "default": false
+    },
+    "changeDetection": {
+      "type": "string",
+      "description": "Specifies the change detection strategy used by the component",
+      "enum": ["Default", "OnPush"],
+      "default": "Default",
+      "alias": "c"
     }
   },
   "required": []

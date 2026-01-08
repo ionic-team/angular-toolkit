@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {<% if(changeDetection === 'OnPush') { %> ChangeDetectionStrategy,<%} %> Component, OnInit } from '@angular/core';
 
 @Component({
   selector: '<%= selector %>',
   templateUrl: './<%= dasherize(name) %>.<%= dasherize(type) %>.html',
   styleUrls: ['./<%= dasherize(name) %>.<%= dasherize(type) %>.<%= styleext %>'],<% if(standalone) {%>
-  standalone: true,<%} %>
+  standalone: true,<%} %><% if(changeDetection === 'OnPush') { %>
+  changeDetection: ChangeDetectionStrategy.OnPush,<%} %>
 })
 export class <%= classify(name) %><%= classify(type) %>  implements OnInit {
 

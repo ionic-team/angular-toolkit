@@ -13,4 +13,5 @@ export interface Schema {
   entryComponent?: boolean;
   type?: string;
   standalone?: boolean;
+  changeDetection?: 'Default' | 'OnPush';
 }
