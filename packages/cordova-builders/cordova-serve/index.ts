@@ -19,7 +19,7 @@ import { prepareServerConfig } from '../utils';
 import type { FormattedAssets } from '../utils';
 import { augmentIndexHtml } from '../utils/append-scripts';
 
-import { createConsoleLogServer } from './log-server';
+import { createConsoleLogServer } from '../utils/log-server';
 import type { CordovaServeBuilderSchema } from './schema';
 
 export type CordovaDevServerBuilderOptions = CordovaServeBuilderSchema & json.JsonObject;
