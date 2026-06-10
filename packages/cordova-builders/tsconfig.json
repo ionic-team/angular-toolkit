@@ -1,5 +1,10 @@
 {
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // copy-webpack-plugin is a CommonJS `export =` module; nodenext needs
+    // interop to import its default (the plugin class) as a constructor.
+    "esModuleInterop": true
+  },
   "include": ["**/*.ts"],
   "exclude": ["**/*.spec.ts"]
 }

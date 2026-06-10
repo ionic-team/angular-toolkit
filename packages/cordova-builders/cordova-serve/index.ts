@@ -8,7 +8,7 @@ import type {
 } from '@angular-devkit/build-angular';
 import { ScriptsWebpackPlugin } from '@angular-devkit/build-angular/src/tools/webpack/plugins';
 import type { json } from '@angular-devkit/core';
-import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { basename } from 'path';
 import { from } from 'rxjs';
 import type { Observable } from 'rxjs';
