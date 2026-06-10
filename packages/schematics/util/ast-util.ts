@@ -259,7 +259,7 @@ export function getDecoratorMetadata(source: ts.SourceFile, identifier: string, 
 
       return false;
     })
-    .filter((expr) => expr.arguments[0] && expr.arguments[0].kind == ts.SyntaxKind.ObjectLiteralExpression)
+    .filter((expr) => expr.arguments[0]?.kind == ts.SyntaxKind.ObjectLiteralExpression)
     .map((expr) => expr.arguments[0] as ts.ObjectLiteralExpression);
 }
 
@@ -281,7 +281,7 @@ export function getFirstNgModuleName(source: ts.SourceFile): string | undefined 
   // Then walk parent pointers up the AST, looking for the ClassDeclaration parent of the NgModule
   // metadata.
   const moduleClass = findClassDeclarationParent(ngModulesMetadata[0]);
-  if (!moduleClass || !moduleClass.name) {
+  if (!moduleClass?.name) {
     return undefined;
   }
 

@@ -7,8 +7,10 @@
   "scripts": {
     "bootstrap": "lerna bootstrap && npm run build",
     "build": "lerna run build",
-    "lint": "lerna run lint",
-    "lint:fix": "lerna run lint -- -- --fix",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier \"**/*.ts\" --write",
+    "format:check": "prettier \"**/*.ts\" --check",
     "prepublishOnly": "npm run build",
     "publish:testing": "lerna publish prerelease --preid=testing --exact --no-git-tag-version --no-push --dist-tag=testing",
     "publish:ci": "lerna publish -m 'chore(release): publish [skip ci]' --exact --conventional-commits --yes --no-verify-access",
@@ -34,12 +36,12 @@
     "ionicframework"
   ],
   "devDependencies": {
-    "@ionic/eslint-config": "^0.3.0",
-    "@ionic/prettier-config": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
@@ -53,13 +55,25 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "prettier": "@ionic/prettier-config",
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always"
+  },
   "eslintConfig": {
     "root": true,
     "ignorePatterns": [
       "node_modules",
       "**/*.d.ts",
-      "packages/schematics/**/files"
+      "packages/schematics/**/files/**"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -67,12 +81,41 @@
     },
     "plugins": [
       "@typescript-eslint",
+      "import",
       "prettier"
     ],
     "extends": [
-      "@ionic/eslint-config/recommended"
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/typescript",
+      "prettier"
     ],
     "rules": {
+      "no-fallthrough": "off",
+      "no-constant-condition": "off",
+      "@typescript-eslint/no-this-alias": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/explicit-module-boundary-types": [
+        "error",
+        { "allowArgumentsExplicitlyTypedAsAny": true }
+      ],
+      "@typescript-eslint/array-type": "error",
+      "@typescript-eslint/consistent-type-assertions": "error",
+      "@typescript-eslint/consistent-type-imports": "error",
+      "@typescript-eslint/prefer-for-of": "error",
+      "@typescript-eslint/prefer-optional-chain": "error",
+      "import/first": "error",
+      "import/order": [
+        "error",
+        {
+          "alphabetize": { "order": "asc", "caseInsensitive": false },
+          "groups": [["builtin", "external"], "parent", ["sibling", "index"]],
+          "newlines-between": "always"
+        }
+      ],
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+      "import/no-mutable-exports": "error",
       "prettier/prettier": "error"
     }
   }
