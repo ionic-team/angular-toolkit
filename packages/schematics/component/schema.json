@@ -89,7 +89,7 @@
     "standalone": {
       "type": "boolean",
       "description": "Specifies if the component should be standalone",
-      "default": false
+      "default": true
     }
   },
   "required": []

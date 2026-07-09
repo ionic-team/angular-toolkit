@@ -8,8 +8,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   selector: '<%= selector %>',
   templateUrl: './<%= dasherize(name) %>.page.html',
   styleUrls: ['./<%= dasherize(name) %>.page.<%= styleext %>'],<% if(standalone) {%>
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]<%} %>
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]<%} else { %>
+  standalone: false,<% } %>
 })
 export class <%= classify(name) %>Page implements OnInit {<% if(routePath) { %>
 
