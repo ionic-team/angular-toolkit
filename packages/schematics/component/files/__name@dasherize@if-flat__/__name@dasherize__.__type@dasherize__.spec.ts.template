@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';<% if(!standalone) {%>
-import { IonicModule } from '@ionic/angular';<%} %>
+import { IonicModule } from '@ionic/angular/lazy';<%} %>
 
 import { <%= classify(name) %><%= classify(type) %> } from './<%= dasherize(name) %>.<%= dasherize(type) %>';
 
