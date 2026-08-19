@@ -6,7 +6,9 @@ on:
       - stable
 
 permissions:
-  contents: read
+  # `lerna version` pushes the release commit and tags and creates the GitHub release,
+  # so the token needs write access to contents. id-token is for npm provenance.
+  contents: write
   id-token: write
 
 jobs:
@@ -26,8 +28,11 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-      - name: 🟢 Ensure Latest npm
-        run: npm install -g npm@latest
+      # npm 12 requires Node >=22.22.2, so `npm@latest` cannot run on the Node 20 pinned
+      # above. npm 11 is the newest line that does, and it supports both provenance and
+      # OIDC trusted publishing.
+      - name: 🟢 Ensure Supported npm
+        run: npm install -g npm@11
         shell: bash
       - name: 📦 Install Dependencies
         run: npm ci --no-package-lock
@@ -35,9 +40,14 @@ jobs:
       - name: 🔄 Bootstrap
         run: npm run bootstrap -- --ignore-scripts
         shell: bash
-      - name: 🚀 Release
-        run: npm run publish:ci -- --provenance
+      - name: 🔖 Version
+        run: npm run version:ci
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # `lerna publish` uploads via libnpmpublish@4, which supports neither provenance nor
+      # OIDC trusted publishing, so the upload goes through the npm CLI instead.
+      - name: 🚀 Publish
+        run: npm run publish:ci
+        shell: bash
 
