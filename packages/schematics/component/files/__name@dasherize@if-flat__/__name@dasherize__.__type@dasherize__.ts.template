@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: '<%= selector %>',
   templateUrl: './<%= dasherize(name) %>.<%= dasherize(type) %>.html',
   styleUrls: ['./<%= dasherize(name) %>.<%= dasherize(type) %>.<%= styleext %>'],<% if(standalone) {%>
-  standalone: true,<%} %>
+  imports: [],<%} else { %>
+  standalone: false,<% } %>
 })
 export class <%= classify(name) %><%= classify(type) %>  implements OnInit {
 

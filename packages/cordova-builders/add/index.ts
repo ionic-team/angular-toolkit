@@ -43,7 +43,7 @@ export default function ngAdd(options: AddOptions): Rule {
     }
     const project = workspace.projects.get(options.project);
 
-    if (!project || project.extensions.projectType !== 'application') {
+    if (project?.extensions.projectType !== 'application') {
       throw new SchematicsException(`Ionic Add requires a project type of "application".`);
     }
 

@@ -102,6 +102,60 @@ export function addRouteToNgModule(options: PageOptions): Rule {
   };
 }
 
+/**
+ * Inserts `routeEntry` into the `routes` array literal in `source`, keeping the file's existing
+ * trailing-comma style. Pass the route object indented and without a trailing comma.
+ */
+function insertRouteEntry(source: ts.SourceFile, filePath: string, routeEntry: string): Change[] {
+  const keywords = findNodes(source, ts.SyntaxKind.VariableStatement);
+
+  for (const keyword of keywords) {
+    if (!ts.isVariableStatement(keyword)) {
+      continue;
+    }
+
+    const [declaration] = keyword.declarationList.declarations;
+
+    if (!ts.isVariableDeclaration(declaration) || !declaration.initializer || declaration.name.getText() !== 'routes') {
+      continue;
+    }
+
+    // Only an array literal can be appended to. Anything else, like a helper call or an
+    // imported constant, gets left alone so we don't corrupt the file.
+    if (!ts.isArrayLiteralExpression(declaration.initializer)) {
+      return [];
+    }
+
+    const lastRouteNode = declaration.initializer.getChildAt(1).getLastToken();
+
+    if (!lastRouteNode) {
+      const closeBracket = declaration.initializer.getLastToken();
+
+      if (!closeBracket) {
+        return [];
+      }
+
+      // An empty array has no element to anchor to, so insert before the closing bracket.
+      return [new InsertChange(filePath, closeBracket.getStart(), `\n${routeEntry},\n`)];
+    }
+
+    const changes: Change[] = [];
+    const trailingCommaFound = lastRouteNode.kind === ts.SyntaxKind.CommaToken;
+
+    if (!trailingCommaFound) {
+      changes.push(new InsertChange(filePath, lastRouteNode.getEnd(), ','));
+    }
+
+    changes.push(
+      new InsertChange(filePath, lastRouteNode.getEnd() + 1, `${routeEntry}${trailingCommaFound ? ',' : ''}\n`)
+    );
+
+    return changes;
+  }
+
+  return [];
+}
+
 export function addRouteToRoutesArray(
   source: ts.SourceFile,
   ngModulePath: string,
@@ -109,45 +163,11 @@ export function addRouteToRoutesArray(
   routeLoadChildren: string,
   ngModuleName: string
 ): Change[] {
-  const keywords = findNodes(source, ts.SyntaxKind.VariableStatement);
-
-  for (const keyword of keywords) {
-    if (ts.isVariableStatement(keyword)) {
-      const [declaration] = keyword.declarationList.declarations;
-
-      if (ts.isVariableDeclaration(declaration) && declaration.initializer && declaration.name.getText() === 'routes') {
-        const node = declaration.initializer.getChildAt(1);
-        const lastRouteNode = node.getLastToken();
-
-        if (!lastRouteNode) {
-          return [];
-        }
-
-        const changes: Change[] = [];
-        let trailingCommaFound = false;
-
-        if (lastRouteNode.kind === ts.SyntaxKind.CommaToken) {
-          trailingCommaFound = true;
-        } else {
-          changes.push(new InsertChange(ngModulePath, lastRouteNode.getEnd(), ','));
-        }
-
-        changes.push(
-          new InsertChange(
-            ngModulePath,
-            lastRouteNode.getEnd() + 1,
-            `  {\n    path: '${routePath}',\n    loadChildren: () => import('${routeLoadChildren}').then( m => m.${ngModuleName})\n  }${
-              trailingCommaFound ? ',' : ''
-            }\n`
-          )
-        );
-
-        return changes;
-      }
-    }
-  }
-
-  return [];
+  return insertRouteEntry(
+    source,
+    ngModulePath,
+    `  {\n    path: '${routePath}',\n    loadChildren: () => import('${routeLoadChildren}').then( m => m.${ngModuleName})\n  }`
+  );
 }
 
 // Standalone functions
@@ -158,45 +178,11 @@ export function addRouteToRoutesFile(
   relativePath: string,
   componentName: string
 ): Change[] {
-  const keywords = findNodes(source, ts.SyntaxKind.VariableStatement);
-
-  for (const keyword of keywords) {
-    if (ts.isVariableStatement(keyword)) {
-      const [declaration] = keyword.declarationList.declarations;
-
-      if (ts.isVariableDeclaration(declaration) && declaration.initializer && declaration.name.getText() === 'routes') {
-        const node = declaration.initializer.getChildAt(1);
-        const lastRouteNode = node.getLastToken();
-
-        if (!lastRouteNode) {
-          return [];
-        }
-
-        const changes: Change[] = [];
-        let trailingCommaFound = false;
-
-        if (lastRouteNode.kind === ts.SyntaxKind.CommaToken) {
-          trailingCommaFound = true;
-        } else {
-          changes.push(new InsertChange(routesFilePath, lastRouteNode.getEnd(), ','));
-        }
-
-        changes.push(
-          new InsertChange(
-            routesFilePath,
-            lastRouteNode.getEnd() + 1,
-            `  {\n    path: '${routePath}',\n    loadComponent: () => import('${relativePath}').then( m => m.${componentName})\n  }${
-              trailingCommaFound ? ',' : ''
-            }\n`
-          )
-        );
-
-        return changes;
-      }
-    }
-  }
-
-  return [];
+  return insertRouteEntry(
+    source,
+    routesFilePath,
+    `  {\n    path: '${routePath}',\n    loadComponent: () => import('${relativePath}').then( m => m.${componentName})\n  }`
+  );
 }
 
 export function findRoutesFile(host: Tree, options: PageOptions): Path | null {

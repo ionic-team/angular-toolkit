@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
     "allowUnreachableCode": false,
-    "baseUrl": ".",
     "declaration": false,
     "importHelpers": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "pretty": true,
@@ -14,6 +13,10 @@
     "strict": true,
     "target": "es2018",
     "lib": ["es2018", "dom"],
+    // TypeScript 6.0 defaults `types` to []; the @angular-devkit .d.ts the
+    // schematics/builders consume reference Node globals (Buffer, node:url),
+    // so opt them back in.
+    "types": ["node"],
     "plugins": [{ "name": "typescript-eslint-language-service" }]
   },
   "include": ["**/*.ts"],

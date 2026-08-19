@@ -75,7 +75,7 @@
     "standalone": {
       "type": "boolean",
       "description": "Specifies if the page should be standalone",
-      "default": false
+      "default": true
     }
   },
   "required": []
