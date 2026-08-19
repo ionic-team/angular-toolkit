@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@12.3.0...@ionic/cordova-builders@13.0.0) (2026-08-19)
+
+
+### Features
+
+* **many:** update to support Ionic Framework v9 ([#533](https://github.com/ionic-team/angular-toolkit/issues/533)) ([0883d9b](https://github.com/ionic-team/angular-toolkit/commit/0883d9b8b4405df6d473b42d9e79752bfda71669)), closes [#522](https://github.com/ionic-team/angular-toolkit/issues/522) [#526](https://github.com/ionic-team/angular-toolkit/issues/526) [#527](https://github.com/ionic-team/angular-toolkit/issues/527) [#532](https://github.com/ionic-team/angular-toolkit/issues/532) [#531](https://github.com/ionic-team/angular-toolkit/issues/531)
+
+
+### BREAKING CHANGES
+
+* **many:** Generated code now targets Ionic 9 and Angular 21 or 22. Pages
+and components import `IonicModule` from `@ionic/angular/lazy` and standalone
+components from the `@ionic/angular` root, which is the Ionic 9 export layout,
+so generated code no longer compiles against Ionic 8. The `page` and `component`
+schematics now default to standalone, and peerDependencies drop Angular 20 and
+below.
+
+
+
+
+
 # [12.3.0](https://github.com/ionic-team/angular-toolkit/compare/@ionic/cordova-builders@12.2.0...@ionic/cordova-builders@12.3.0) (2025-08-11)
 
 
