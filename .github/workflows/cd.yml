@@ -47,7 +47,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # `lerna publish` uploads via libnpmpublish@4, which supports neither provenance nor
       # OIDC trusted publishing, so the upload goes through the npm CLI instead.
+      #
+      # NODE_AUTH_TOKEN is cleared on purpose. `setup-node` exports the placeholder
+      # `XXXXX-XXXXX-XXXXX-XXXXX` when given no token, and the .npmrc it writes points
+      # `_authToken` at that variable, so npm sends the placeholder as a real credential
+      # and never attempts the OIDC exchange. The registry masks the rejection as E404.
+      # With no credential configured, npm falls back to trusted publishing.
       - name: 🚀 Publish
         run: npm run publish:ci
         shell: bash
+        env:
+          NODE_AUTH_TOKEN: ''
 
