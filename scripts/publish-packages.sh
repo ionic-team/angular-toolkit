@@ -34,3 +34,16 @@ for manifest in packages/*/package.json; do
 done
 
 echo "published $published package(s)"
+
+# A run that publishes nothing is a failure, not a success. `lerna version` exits 0 when
+# it declines to version (an EBEHIND warning on a stale checkout, for example), which
+# leaves the manifests at their released versions and makes every package look already
+# published. Without this the job goes green having shipped nothing.
+if [ "$published" -eq 0 ]; then
+  echo "error: no packages were published." >&2
+  echo "The manifest versions above are already on the registry, so the Version step" >&2
+  echo "did not produce a new release. Check the Version step output rather than" >&2
+  echo "re-running this job: re-running a workflow checks out its original commit," >&2
+  echo "which still carries the pre-release versions." >&2
+  exit 1
+fi
