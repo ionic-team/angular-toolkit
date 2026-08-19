@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular/lazy';
 import { <%= classify(name) %><%= classify(type) %> } from './<%= dasherize(name) %>.component';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, IonicModule,],
-  declarations: [<%= classify(name) %><%= classify(type) %> ],
-  exports: [<%= classify(name) %><%= classify(type) %> ]
+  imports: [CommonModule, FormsModule, IonicModule],
+  declarations: [<%= classify(name) %><%= classify(type) %>],
+  exports: [<%= classify(name) %><%= classify(type) %>],
 })
-export class <%= classify(name) %><%= classify(type) %> Module {}
+export class <%= classify(name) %><%= classify(type) %>Module {}

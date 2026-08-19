@@ -48,7 +48,7 @@
     "@schematics/angular": ">=21.0.0 <23.0.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.2200.0",
+    "@angular-devkit/architect": ">=0.2200.0 <0.2300.0",
     "@angular-devkit/build-angular": "^22.0.0",
     "@angular-devkit/core": "^22.0.0",
     "@angular-devkit/schematics": "^22.0.0",
