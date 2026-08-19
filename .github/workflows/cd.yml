@@ -58,4 +58,8 @@ jobs:
         shell: bash
         env:
           NODE_AUTH_TOKEN: ''
+          # npm logs every OIDC token-exchange failure at verbose, so at the default
+          # loglevel a missing or mismatched trusted publisher just surfaces as
+          # ENEEDAUTH with no reason attached.
+          NPM_CONFIG_LOGLEVEL: verbose
 
